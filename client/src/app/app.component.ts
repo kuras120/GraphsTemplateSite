@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Hubris-Web';
+  title = 'Graphs Template Site';
   // tslint:disable-next-line:variable-name
   constructor(private _http: HttpClient) {
     this.c1.name = 'RandomBookName';

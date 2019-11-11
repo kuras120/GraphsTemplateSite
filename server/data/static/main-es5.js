@@ -370,7 +370,7 @@
                 // tslint:disable-next-line:variable-name
                 function AppComponent(_http) {
                     this._http = _http;
-                    this.title = 'Hubris-Web';
+                    this.title = 'Graphs Template Site';
                     this.c1 = new Cust();
                     this.c1.name = 'RandomBookName';
                 }
@@ -535,7 +535,7 @@
           \***************************/
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
-            module.exports = __webpack_require__(/*! /home/wojciech/Projects/Python/hubris-web/client/src/main.ts */ "./src/main.ts");
+            module.exports = __webpack_require__(/*! /home/wojciech/Projects/Python/GraphsTemplateSite/client/src/main.ts */ "./src/main.ts");
             /***/ 
         })
     }, [[0, "runtime", "vendor"]]]);

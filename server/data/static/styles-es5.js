@@ -276,7 +276,7 @@
           \******************************/
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
-            module.exports = __webpack_require__(/*! /home/wojciech/Projects/Python/hubris-web/client/src/styles.css */ "./src/styles.css");
+            module.exports = __webpack_require__(/*! /home/wojciech/Projects/Python/GraphsTemplateSite/client/src/styles.css */ "./src/styles.css");
             /***/ 
         })
     }, [[3, "runtime"]]]);
