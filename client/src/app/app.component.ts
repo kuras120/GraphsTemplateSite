@@ -1,38 +1,165 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Graphs Template Site';
-  // tslint:disable-next-line:variable-name
-  constructor(private _http: HttpClient) {
-    this.c1.name = 'RandomBookName';
-  }
+  view: any[];
 
-  c1: Cust = new Cust();
-  click1() {
-    this.getBooks().subscribe(b => this.c1.name = b.toString());
-  }
-  click2() {
-    this.getAllBooks().subscribe(b => this.c1 = b);
-  }
+  // options for the chart
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Sales';
+  timeline = true;
 
-  getAllBooks() {
-    return this._http
-      .get<Cust>('./getcust'); // GET request
-  }
-  getBooks() {
-    return this._http
-      .post('./apitest/', '5'); // POST request with argument
-  }
-}
+  colorScheme = {
+    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
+  };
 
-export class Cust {
-  name: string;
-  age: number;
-  city: string;
+  // pie
+  showLabels = true;
+
+  // data goes here
+  public single = [
+    {
+      name: 'China',
+      value: 2243772
+    },
+    {
+      name: 'USA',
+      value: 1126000
+    },
+    {
+      name: 'Norway',
+      value: 296215
+    },
+    {
+      name: 'Japan',
+      value: 257363
+    },
+    {
+      name: 'Germany',
+      value: 196750
+    },
+    {
+      name: 'France',
+      value: 204617
+    }
+  ];
+
+  public multi = [
+    {
+      name: 'China',
+      series: [
+        {
+          name: '2018',
+          value: 2243772
+        },
+        {
+          name: '2017',
+          value: 1227770
+        }
+      ]
+    },
+
+    {
+      name: 'USA',
+      series: [
+        {
+          name: '2018',
+          value: 1126000
+        },
+        {
+          name: '2017',
+          value: 764666
+        }
+      ]
+    },
+
+    {
+      name: 'Norway',
+      series: [
+        {
+          name: '2018',
+          value: 296215
+        },
+        {
+          name: '2017',
+          value: 209122
+        }
+      ]
+    },
+
+    {
+      name: 'Japan',
+      series: [
+        {
+          name: '2018',
+          value: 257363
+        },
+        {
+          name: '2017',
+          value: 205350
+        }
+      ]
+    },
+
+    {
+      name: 'Germany',
+      series: [
+        {
+          name: '2018',
+          value: 196750
+        },
+        {
+          name: '2017',
+          value: 129246
+        }
+      ]
+    },
+
+    {
+      name: 'France',
+      series: [
+        {
+          name: '2018',
+          value: 204617
+        },
+        {
+          name: '2017',
+          value: 149797
+        }
+      ]
+    }
+  ];
+  resize() {
+    let width;
+    let height;
+    if (window.innerWidth < 1366) {
+      width = window.innerWidth - 100;
+      height = width / 2;
+    } else {
+      width = (window.innerWidth / 2) - 100;
+      height = width / 2;
+    }
+    this.view = [width, height];
+    console.log(window.innerWidth);
+  }
+  ngOnInit(): void {
+    this.resize();
+  }
+  onResize(event) {
+    this.resize();
+  }
+  onSelect(event: {}) {
+    console.log('clicked');
+  }
 }

@@ -1,8 +1,58 @@
 <div style="text-align:center">
-  <h1>
+  <h1 class="card-header bg-info">
     Welcome to {{ title }}!
   </h1>
-  <h2>Test App: {{c1.name}}</h2>
-  <button (click)="click1()" >click me</button>
-  <button (click)="click2()" >click me</button>
+  <h3 class="text-secondary pt-5">
+    Plug-in electric vehicle Selling Countries
+  </h3>
+  <div class="d-none d-md-flex row px-5">
+    <div class="col">
+      <div class="row">
+        <h4 class="m-auto">
+          Vertical Bar Chart
+        </h4>
+      </div>
+      <div class="row">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          (window:resize)="onResize($event)"
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <h4 class="m-auto">
+          Vertical Bar Chart Normalized
+        </h4>
+      </div>
+      <div class="row">
+        <ngx-charts-bar-vertical-normalized
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="multi"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          (window:resize)="onResize($event)"
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical-normalized>
+      </div>
+    </div>
+  </div>
 </div>
