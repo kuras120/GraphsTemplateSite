@@ -5,11 +5,11 @@ from data import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'customers', views.CustViewSet)
+# router.register(r'customers', views.UserViewSet)
 
 urlpatterns = [
-    url(r'^$', views.HomePageView.as_view()),
-    url(r'^links/$', views.LinksPageView.as_view()),  # simple view
-    url(r'^getcust/$', views.Customers.get_cust),  # simple view
-    url(r'^apitest/$', views.calc_test),  # for REST API test
+    url('^$', views.HomePageView.as_view()),
+    url('^links/$', views.LinksPageView.as_view()),
+    # url('^user/$', views.Users.get_user),  # simple view
+    # url('^apitest/$', views.calc_test),  # for REST API test
 ]

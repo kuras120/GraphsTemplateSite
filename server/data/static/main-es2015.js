@@ -32,20 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <h2>Test App: {{c1.name}}</h2>\n  <button (click)=\"click1()\" >click me</button>\n  <button (click)=\"click2()\" >click me</button>\n</div>\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/books/books.component.html":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/books/books.component.html ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>books works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div style=\"text-align:center\">\n  <h1 class=\"card-header bg-info\">\n    Welcome to {{ title }}!\n  </h1>\n  <h3 class=\"text-secondary pt-5\">\n    Plug-in electric vehicle Selling Countries\n  </h3>\n  <div class=\"d-none d-md-flex row px-5\">\n    <div class=\"col\">\n      <div class=\"row\">\n        <h4 class=\"m-auto\">\n          Vertical Bar Chart\n        </h4>\n      </div>\n      <div class=\"row\">\n        <ngx-charts-bar-vertical\n          [view]=\"view\"\n          [scheme]=\"colorScheme\"\n          [results]=\"single\"\n          [gradient]=\"gradient\"\n          [xAxis]=\"showXAxis\"\n          [yAxis]=\"showYAxis\"\n          [legend]=\"showLegend\"\n          [showXAxisLabel]=\"showXAxisLabel\"\n          [showYAxisLabel]=\"showYAxisLabel\"\n          [xAxisLabel]=\"xAxisLabel\"\n          [yAxisLabel]=\"yAxisLabel\"\n          (window:resize)=\"onResize($event)\"\n          (select)=\"onSelect($event)\">\n        </ngx-charts-bar-vertical>\n      </div>\n    </div>\n    <div class=\"col\">\n      <div class=\"row\">\n        <h4 class=\"m-auto\">\n          Vertical Bar Chart Normalized\n        </h4>\n      </div>\n      <div class=\"row\">\n        <ngx-charts-bar-vertical-normalized\n          [view]=\"view\"\n          [scheme]=\"colorScheme\"\n          [results]=\"multi\"\n          [gradient]=\"gradient\"\n          [xAxis]=\"showXAxis\"\n          [yAxis]=\"showYAxis\"\n          [legend]=\"showLegend\"\n          [showXAxisLabel]=\"showXAxisLabel\"\n          [showYAxisLabel]=\"showYAxisLabel\"\n          [xAxisLabel]=\"xAxisLabel\"\n          [yAxisLabel]=\"yAxisLabel\"\n          (window:resize)=\"onResize($event)\"\n          (select)=\"onSelect($event)\">\n        </ngx-charts-bar-vertical-normalized>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -295,45 +282,166 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent, Cust */
+/*! exports provided: AppComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cust", function() { return Cust; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
 
 
 let AppComponent = class AppComponent {
-    // tslint:disable-next-line:variable-name
-    constructor(_http) {
-        this._http = _http;
+    constructor() {
         this.title = 'Graphs Template Site';
-        this.c1 = new Cust();
-        this.c1.name = 'RandomBookName';
+        // options for the chart
+        this.showXAxis = true;
+        this.showYAxis = true;
+        this.gradient = false;
+        this.showLegend = true;
+        this.showXAxisLabel = true;
+        this.xAxisLabel = 'Country';
+        this.showYAxisLabel = true;
+        this.yAxisLabel = 'Sales';
+        this.timeline = true;
+        this.colorScheme = {
+            domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
+        };
+        // pie
+        this.showLabels = true;
+        // data goes here
+        this.single = [
+            {
+                name: 'China',
+                value: 2243772
+            },
+            {
+                name: 'USA',
+                value: 1126000
+            },
+            {
+                name: 'Norway',
+                value: 296215
+            },
+            {
+                name: 'Japan',
+                value: 257363
+            },
+            {
+                name: 'Germany',
+                value: 196750
+            },
+            {
+                name: 'France',
+                value: 204617
+            }
+        ];
+        this.multi = [
+            {
+                name: 'China',
+                series: [
+                    {
+                        name: '2018',
+                        value: 2243772
+                    },
+                    {
+                        name: '2017',
+                        value: 1227770
+                    }
+                ]
+            },
+            {
+                name: 'USA',
+                series: [
+                    {
+                        name: '2018',
+                        value: 1126000
+                    },
+                    {
+                        name: '2017',
+                        value: 764666
+                    }
+                ]
+            },
+            {
+                name: 'Norway',
+                series: [
+                    {
+                        name: '2018',
+                        value: 296215
+                    },
+                    {
+                        name: '2017',
+                        value: 209122
+                    }
+                ]
+            },
+            {
+                name: 'Japan',
+                series: [
+                    {
+                        name: '2018',
+                        value: 257363
+                    },
+                    {
+                        name: '2017',
+                        value: 205350
+                    }
+                ]
+            },
+            {
+                name: 'Germany',
+                series: [
+                    {
+                        name: '2018',
+                        value: 196750
+                    },
+                    {
+                        name: '2017',
+                        value: 129246
+                    }
+                ]
+            },
+            {
+                name: 'France',
+                series: [
+                    {
+                        name: '2018',
+                        value: 204617
+                    },
+                    {
+                        name: '2017',
+                        value: 149797
+                    }
+                ]
+            }
+        ];
     }
-    click1() {
-        this.getBooks().subscribe(b => this.c1.name = b.toString());
+    resize() {
+        let width;
+        let height;
+        if (window.innerWidth < 1366) {
+            width = window.innerWidth - 100;
+            height = width / 2;
+        }
+        else {
+            width = (window.innerWidth / 2) - 100;
+            height = width / 2;
+        }
+        this.view = [width, height];
+        console.log(window.innerWidth);
     }
-    click2() {
-        this.getAllBooks().subscribe(b => this.c1 = b);
+    ngOnInit() {
+        this.resize();
     }
-    getAllBooks() {
-        return this._http
-            .get('./getcust'); // GET request
+    onResize(event) {
+        this.resize();
     }
-    getBooks() {
-        return this._http
-            .post('./apitest/', '5'); // POST request with argument
+    onSelect(event) {
+        console.log('clicked');
     }
 };
-AppComponent.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
@@ -342,8 +450,6 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     })
 ], AppComponent);
 
-class Cust {
-}
 
 
 /***/ }),
@@ -361,12 +467,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _books_books_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./books/books.component */ "./src/app/books/books.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @swimlane/ngx-charts */ "./node_modules/@swimlane/ngx-charts/release/esm.js");
 
 
 
+// import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -375,61 +482,18 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-            _books_books_component__WEBPACK_IMPORTED_MODULE_5__["BooksComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+            // AppRoutingModule,
+            _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__["NgxChartsModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"]
         ],
         providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
     })
 ], AppModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/books/books.component.css":
-/*!*******************************************!*\
-  !*** ./src/app/books/books.component.css ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Jvb2tzL2Jvb2tzLmNvbXBvbmVudC5jc3MifQ== */");
-
-/***/ }),
-
-/***/ "./src/app/books/books.component.ts":
-/*!******************************************!*\
-  !*** ./src/app/books/books.component.ts ***!
-  \******************************************/
-/*! exports provided: BooksComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BooksComponent", function() { return BooksComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let BooksComponent = class BooksComponent {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-BooksComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-books',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./books.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/books/books.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./books.component.css */ "./src/app/books/books.component.css")).default]
-    })
-], BooksComponent);
 
 
 

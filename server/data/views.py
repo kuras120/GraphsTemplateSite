@@ -1,16 +1,15 @@
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponse, JsonResponse
 
-# Create your views here.
 from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets
 from rest_framework.utils import json
 from rest_framework import serializers
-from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-from data.models import Customer
+# Create your views here.
 
 
 class HomePageView(TemplateView):
@@ -23,32 +22,23 @@ class LinksPageView(TemplateView):
         return render(request, 'links.html', context=None)
 
 
-class Customers(TemplateView):
-    @staticmethod
-    def get_cust(request):
-        name='liran'
-        return HttpResponse('{ "name":"' + name + '", "age":31, "city":"New York" }')
-
-
-@api_view(["POST"])
-def calc_test(x1):
-    try:
-        x=json.loads(x1.body)
-        y=str(x*100)
-        return JsonResponse("Result:"+y,safe=False)
-    except ValueError as e:
-        return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
-
-
-class CustSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Customer
-        fields = ('first_name', 'last_name', 'type')
-
-
-class CustViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Customer.objects.all()
-    serializer_class = CustSerializer
+# class Users(TemplateView):
+#     @staticmethod
+#     @api_view(['GET'])
+#     def get_user(request):
+#         user = User.objects.get(id=request.query_params.get('id'))
+#         return JsonResponse(UserSerializer(user).data)
+#
+#
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('name', 'surname', 'password', 'role')
+#
+#
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer

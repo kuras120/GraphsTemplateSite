@@ -1,9 +1,23 @@
 from django.db import models
-
 # Create your models here.
 
 
-class Customer(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    type = models.CharField(max_length=10)
+class Graph(models.Model):
+    graph_name = models.CharField(max_length=32, unique=True)
+    type = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.graph_name
+
+
+class Storage(models.Model):
+    key = models.FloatField()
+    value = models.FloatField()
+    description = models.CharField(max_length=64, null=False)
+    graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '(' + str(self.key) + ',' + str(self.value) + ')'
+
+    class Meta:
+        verbose_name_plural = 'Storage'

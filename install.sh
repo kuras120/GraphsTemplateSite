@@ -8,5 +8,4 @@ python3 -m venv env
 source env/bin/activate
 cd server
 pip install -r requirements.txt
-python manage.py migrate
 
