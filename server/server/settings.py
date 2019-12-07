@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'data.apps.DataConfig',
+    'storage.apps.DataConfig',
     'rest_framework',
 ]
 
@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, '../data/static'),
+    os.path.join(PROJECT_ROOT, '../storage/static'),
 )
 
 # Simplified static file serving.

@@ -1,0 +1,67 @@
+<div class="row">
+  <h4 class="m-auto">
+    {{ graphName }}
+  </h4>
+</div>
+<div class="row pb-5" [ngSwitch]="type">
+  <ngx-charts-bar-vertical *ngSwitchCase="'charts-bar-vertical'"
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="result"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (window:resize)="onResize($event)"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-vertical>
+  <ngx-charts-bar-vertical-normalized *ngSwitchCase="'charts-bar-vertical-normalized'"
+   [view]="view"
+   [scheme]="colorScheme"
+   [results]="result"
+   [gradient]="gradient"
+   [xAxis]="showXAxis"
+   [yAxis]="showYAxis"
+   [legend]="showLegend"
+   [showXAxisLabel]="showXAxisLabel"
+   [showYAxisLabel]="showYAxisLabel"
+   [xAxisLabel]="xAxisLabel"
+   [yAxisLabel]="yAxisLabel"
+   (window:resize)="onResize($event)"
+   (select)="onSelect($event)">
+  </ngx-charts-bar-vertical-normalized>
+  <ngx-charts-bar-horizontal *ngSwitchCase="'charts-bar-horizontal'"
+   [view]="view"
+   [scheme]="colorScheme"
+   [results]="result"
+   [gradient]="gradient"
+   [xAxis]="showXAxis"
+   [yAxis]="showYAxis"
+   [legend]="showLegend"
+   [showXAxisLabel]="showXAxisLabel"
+   [showYAxisLabel]="showYAxisLabel"
+   [xAxisLabel]="xAxisLabel"
+   [yAxisLabel]="yAxisLabel"
+   (window:resize)="onResize($event)"
+   (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal>
+  <ngx-charts-bar-horizontal-normalized *ngSwitchCase="'charts-bar-horizontal-normalized'"
+   [view]="view"
+   [scheme]="colorScheme"
+   [results]="result"
+   [gradient]="gradient"
+   [xAxis]="showXAxis"
+   [yAxis]="showYAxis"
+   [legend]="showLegend"
+   [showXAxisLabel]="showXAxisLabel"
+   [showYAxisLabel]="showYAxisLabel"
+   [xAxisLabel]="xAxisLabel"
+   [yAxisLabel]="yAxisLabel"
+   (window:resize)="onResize($event)"
+   (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal-normalized>
+</div>

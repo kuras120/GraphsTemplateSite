@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Graph} from './models/graph.model';
+import {NavbarComponent} from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -7,159 +9,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Graphs Template Site';
-  view: any[];
+  graphs: Graph[] = [];
+  query: string;
 
-  // options for the chart
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Sales';
-  timeline = true;
+  constructor() { }
 
-  colorScheme = {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
-  };
-
-  // pie
-  showLabels = true;
-
-  // data goes here
-  public single = [
-    {
-      name: 'China',
-      value: 2243772
-    },
-    {
-      name: 'USA',
-      value: 1126000
-    },
-    {
-      name: 'Norway',
-      value: 296215
-    },
-    {
-      name: 'Japan',
-      value: 257363
-    },
-    {
-      name: 'Germany',
-      value: 196750
-    },
-    {
-      name: 'France',
-      value: 204617
-    }
-  ];
-
-  public multi = [
-    {
-      name: 'China',
-      series: [
-        {
-          name: '2018',
-          value: 2243772
-        },
-        {
-          name: '2017',
-          value: 1227770
-        }
-      ]
-    },
-
-    {
-      name: 'USA',
-      series: [
-        {
-          name: '2018',
-          value: 1126000
-        },
-        {
-          name: '2017',
-          value: 764666
-        }
-      ]
-    },
-
-    {
-      name: 'Norway',
-      series: [
-        {
-          name: '2018',
-          value: 296215
-        },
-        {
-          name: '2017',
-          value: 209122
-        }
-      ]
-    },
-
-    {
-      name: 'Japan',
-      series: [
-        {
-          name: '2018',
-          value: 257363
-        },
-        {
-          name: '2017',
-          value: 205350
-        }
-      ]
-    },
-
-    {
-      name: 'Germany',
-      series: [
-        {
-          name: '2018',
-          value: 196750
-        },
-        {
-          name: '2017',
-          value: 129246
-        }
-      ]
-    },
-
-    {
-      name: 'France',
-      series: [
-        {
-          name: '2018',
-          value: 204617
-        },
-        {
-          name: '2017',
-          value: 149797
-        }
-      ]
-    }
-  ];
-  resize() {
-    let width;
-    let height;
-    if (window.innerWidth < 1366) {
-      width = window.innerWidth - 100;
-      height = width / 2;
-    } else {
-      width = (window.innerWidth / 2) - 100;
-      height = width / 2;
-    }
-    this.view = [width, height];
-    console.log(window.innerWidth);
+  setQuery(value: string) {
+    this.query = value;
   }
+
   ngOnInit(): void {
-    this.resize();
-  }
-  onResize(event) {
-    this.resize();
-  }
-  onSelect(event: {}) {
-    console.log('clicked');
+    this.graphs.push({graph_name: 'Vertical Bar Chart', type: 'charts-bar-vertical', data: []});
+    this.graphs.push({graph_name: 'Vertical Bar Chart Normalized', type: 'charts-bar-vertical-normalized', data: []});
+    this.graphs.push({graph_name: 'Horizontal Bar Chart', type: 'charts-bar-horizontal', data: []});
+    this.graphs.push({graph_name: 'Horizontal Bar Chart Normalized', type: 'charts-bar-horizontal-normalized', data: []});
   }
 }
