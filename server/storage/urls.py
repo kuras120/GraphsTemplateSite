@@ -5,11 +5,11 @@ from storage import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-# router.register(r'customers', views.UserViewSet)
+router.register(r'graphs', views.GraphViewSet)
 
 urlpatterns = [
     url('^$', views.HomePageView.as_view()),
-    url('^links/$', views.LinksPageView.as_view()),
-    # url('^user/$', views.Users.get_user),  # simple view
-    # url('^apitest/$', views.calc_test),  # for REST API test
+    url('^graph/$', views.Graph.as_view())
 ]
+
+urlpatterns += router.urls

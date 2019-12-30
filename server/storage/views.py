@@ -1,44 +1,49 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.http import HttpResponse, JsonResponse
-
+from rest_framework import views
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.utils import json
 from rest_framework import serializers
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.renderers import TemplateHTMLRenderer
 
+from storage import models
 # Create your views here.
 
 
-class HomePageView(TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'index.html', context=None)
+class HomePageView(views.APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'index.html'
+
+    @staticmethod
+    def get(request):
+        return Response()
 
 
-class LinksPageView(TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'links.html', context=None)
+class Graph(views.APIView):
+    @staticmethod
+    def get(request):
+        graph = models.Graph.objects.get(id=request.query_params.get('id'))
+        return Response(GraphSerializer(graph).data)
+
+    @staticmethod
+    def post(request):
+        return Response('saved')
 
 
-# class Users(TemplateView):
-#     @staticmethod
-#     @api_view(['GET'])
-#     def get_user(request):
-#         user = User.objects.get(id=request.query_params.get('id'))
-#         return JsonResponse(UserSerializer(user).data)
-#
-#
-# class UserSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('name', 'surname', 'password', 'role')
-#
-#
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows users to be viewed or edited.
-#     """
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+class DataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Data
+        fields = ('key', 'value', 'description')
+
+
+class GraphSerializer(serializers.ModelSerializer):
+    data = DataSerializer(many=True)
+
+    class Meta:
+        model = models.Graph
+        fields = ('graph_name', 'type', 'data')
+
+
+class GraphViewSet(viewsets.ModelViewSet):
+    queryset = models.Graph.objects.all()
+    serializer_class = GraphSerializer
