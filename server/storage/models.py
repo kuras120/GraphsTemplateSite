@@ -14,7 +14,7 @@ class Data(models.Model):
     key = models.FloatField()
     value = models.FloatField()
     description = models.CharField(max_length=64, null=False)
-    graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
+    graph = models.ForeignKey(Graph, related_name='data', on_delete=models.CASCADE)
 
     def __str__(self):
         return '(' + str(self.key) + ',' + str(self.value) + ')'
