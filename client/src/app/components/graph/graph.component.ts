@@ -50,6 +50,17 @@ export class GraphComponent implements OnInit {
     {name: 'France', series: [{name: '2018', value: 204617}, {name: '2017', value: 149797}]}
   ];
 
+  constructor() { }
+
+  ngOnInit(): void {
+    this.resize();
+    if (this.type.includes('normalized')) {
+      this.result = this.multi;
+    } else {
+      this.result = this.single;
+    }
+  }
+
   resize() {
     let width: number;
     let height: number;
@@ -63,15 +74,6 @@ export class GraphComponent implements OnInit {
     }
     this.view = [width, height];
     console.log(window.innerWidth);
-  }
-
-  ngOnInit(): void {
-    this.resize();
-    if (this.type.includes('normalized')) {
-      this.result = this.multi;
-    } else {
-      this.result = this.single;
-    }
   }
 
   onResize(event) {

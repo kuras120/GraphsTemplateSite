@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          Dropdown\n        </a>\n        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n          <a class=\"dropdown-item\" href=\"#\">Action</a>\n          <a class=\"dropdown-item\" href=\"#\">Another action</a>\n          <div class=\"dropdown-divider\"></div>\n          <a class=\"dropdown-item\" href=\"#\">Something else here</a>\n        </div>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link disabled\" href=\"#\" tabindex=\"-1\" aria-disabled=\"true\">Disabled</a>\n      </li>\n    </ul>\n    <input class=\"form-control mr-sm-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <input class=\"form-control mr-sm-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -316,23 +316,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_graph_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/graph.service */ "./src/app/services/graph.service.ts");
+
 
 
 let AppComponent = class AppComponent {
-    constructor() {
+    constructor(graphService) {
+        this.graphService = graphService;
         this.title = 'Graphs Template Site';
         this.graphs = [];
-    }
-    setQuery(value) {
-        this.query = value;
     }
     ngOnInit() {
         this.graphs.push({ graph_name: 'Vertical Bar Chart', type: 'charts-bar-vertical', data: [] });
         this.graphs.push({ graph_name: 'Vertical Bar Chart Normalized', type: 'charts-bar-vertical-normalized', data: [] });
         this.graphs.push({ graph_name: 'Horizontal Bar Chart', type: 'charts-bar-horizontal', data: [] });
         this.graphs.push({ graph_name: 'Horizontal Bar Chart Normalized', type: 'charts-bar-horizontal-normalized', data: [] });
+        this.getGraphs();
+    }
+    setQuery(value) {
+        this.query = value;
+    }
+    getGraphs() {
+        this.graphService.list().subscribe(data => {
+            console.log(data);
+        }, error => console.error(error), () => console.log('Graphs loaded'));
     }
 };
+AppComponent.ctorParameters = () => [
+    { type: _services_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"] }
+];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
@@ -365,10 +377,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_graph_graph_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/graph/graph.component */ "./src/app/components/graph/graph.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng2-search-filter */ "./node_modules/ng2-search-filter/ng2-search-filter.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 
 
 
 // import { AppRoutingModule } from './app-routing.module';
+
 
 
 
@@ -391,9 +405,10 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__["NgxChartsModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-            ng2_search_filter__WEBPACK_IMPORTED_MODULE_9__["Ng2SearchPipeModule"]
+            ng2_search_filter__WEBPACK_IMPORTED_MODULE_9__["Ng2SearchPipeModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"]
         ],
-        providers: [],
+        providers: [_angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"]],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
     })
 ], AppModule);
@@ -464,6 +479,15 @@ let GraphComponent = class GraphComponent {
             { name: 'France', series: [{ name: '2018', value: 204617 }, { name: '2017', value: 149797 }] }
         ];
     }
+    ngOnInit() {
+        this.resize();
+        if (this.type.includes('normalized')) {
+            this.result = this.multi;
+        }
+        else {
+            this.result = this.single;
+        }
+    }
     resize() {
         let width;
         let height;
@@ -477,15 +501,6 @@ let GraphComponent = class GraphComponent {
         }
         this.view = [width, height];
         console.log(window.innerWidth);
-    }
-    ngOnInit() {
-        this.resize();
-        if (this.type.includes('normalized')) {
-            this.result = this.multi;
-        }
-        else {
-            this.result = this.single;
-        }
     }
     onResize(event) {
         this.resize();
@@ -560,6 +575,43 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./navbar.component.css */ "./src/app/components/navbar/navbar.component.css")).default]
     })
 ], NavbarComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/graph.service.ts":
+/*!*******************************************!*\
+  !*** ./src/app/services/graph.service.ts ***!
+  \*******************************************/
+/*! exports provided: GraphService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GraphService", function() { return GraphService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let GraphService = class GraphService {
+    constructor(http) {
+        this.http = http;
+    }
+    list() {
+        return this.http.get('/graphs');
+    }
+};
+GraphService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+GraphService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], GraphService);
 
 
 

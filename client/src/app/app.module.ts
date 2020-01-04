@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { GraphComponent } from './components/graph/graph.component';
 import {FormsModule} from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NgxChartsModule,
     BrowserAnimationsModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
