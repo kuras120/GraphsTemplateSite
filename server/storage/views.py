@@ -33,7 +33,7 @@ class Graph(views.APIView):
 class DataSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Data
-        fields = ('key', 'value', 'description')
+        fields = ('key', 'value')
 
 
 class GraphSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class GraphSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Graph
-        fields = ('graph_name', 'type', 'data')
+        fields = ('name', 'sub_name', 'description', 'type', 'x_label', 'y_label', 'creation_date', 'data')
 
 
 class GraphViewSet(viewsets.ModelViewSet):

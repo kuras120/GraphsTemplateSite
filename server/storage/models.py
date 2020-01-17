@@ -3,17 +3,21 @@ from django.db import models
 
 
 class Graph(models.Model):
-    graph_name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
+    sub_name = models.CharField(max_length=32)
+    description = models.CharField(max_length=64)
     type = models.CharField(max_length=16)
+    x_label = models.CharField(max_length=16)
+    y_label = models.CharField(max_length=16)
+    creation_date = models.DateTimeField()
 
     def __str__(self):
-        return self.graph_name
+        return self.name + ' - ' + self.sub_name
 
 
 class Data(models.Model):
     key = models.FloatField()
     value = models.FloatField()
-    description = models.CharField(max_length=64, null=False)
     graph = models.ForeignKey(Graph, related_name='data', on_delete=models.CASCADE)
 
     def __str__(self):
