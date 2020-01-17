@@ -7,20 +7,20 @@ from django.contrib.auth.hashers import make_password
 
 
 class GraphAdmin(admin.ModelAdmin):
-    list_display = ['id', 'graph_name', 'type']
-    search_fields = ['graph_name']
+    list_display = ['id', 'name', 'sub_name', 'description', 'type', 'x_label', 'y_label', 'creation_date']
+    search_fields = ['name']
     list_filter = ['type']
-    ordering = ['id']
+    ordering = ['id', 'creation_date']
 
 
 class DataAdmin(admin.ModelAdmin):
-    list_display = ['id', 'key', 'value', 'description', 'get_graph']
-    search_fields = ['graph__graph_name']
+    list_display = ['id', 'key', 'value', 'get_graph']
+    search_fields = ['graph__name']
     list_filter = ['graph__type']
     ordering = ['id']
 
     def get_graph(self, obj):
-        return obj.graph.graph_name
+        return obj.graph.name
 
     get_graph.short_description = 'Graph'
     get_graph.admin_order_field = 'graph__id'
