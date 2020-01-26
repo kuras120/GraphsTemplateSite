@@ -29,11 +29,14 @@ export class AppComponent implements OnInit {
         response.sort((a, b) => (a.name > b.name) ? 1 : -1);
         let lastGraph: Graph = null;
         response.forEach(graph => {
+          graph.x_label = graph.x_label.toLowerCase();
+          graph.y_label = graph.y_label.toLowerCase();
           const formattedData = [];
           graph.data.forEach(data => {
-            data.graph = {name: graph.name, sub_name: graph.sub_name, description: graph.description,
-              type: graph.type, x_label: graph.x_label, y_label: graph.y_label, data: [], creation_date: graph.creation_date,
-              output_data: []};
+            const tempGraph = Object.assign({}, graph);
+            tempGraph.data = [];
+            tempGraph.output_data = [];
+            data.graph = tempGraph;
             formattedData.push({name: data.key, value: data.value});
           });
           if (lastGraph != null && lastGraph.name === graph.name &&

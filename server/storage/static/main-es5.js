@@ -28,7 +28,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Plug-in electric vehicle Selling Countries\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filter: query\" [graphName] = \"graph.graph_name\" [type]=\"graph.type\" class=\"col\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filter: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/graph/graph.component.html": 
@@ -39,7 +39,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <h4 class=\"m-auto\">\n    {{ graphName }}\n  </h4>\n</div>\n<div class=\"row pb-5\" [ngSwitch]=\"type\">\n  <ngx-charts-bar-vertical *ngSwitchCase=\"'charts-bar-vertical'\"\n    [view]=\"view\"\n    [scheme]=\"colorScheme\"\n    [results]=\"result\"\n    [gradient]=\"gradient\"\n    [xAxis]=\"showXAxis\"\n    [yAxis]=\"showYAxis\"\n    [legend]=\"showLegend\"\n    [showXAxisLabel]=\"showXAxisLabel\"\n    [showYAxisLabel]=\"showYAxisLabel\"\n    [xAxisLabel]=\"xAxisLabel\"\n    [yAxisLabel]=\"yAxisLabel\"\n    (window:resize)=\"onResize($event)\"\n    (select)=\"onSelect($event)\">\n  </ngx-charts-bar-vertical>\n  <ngx-charts-bar-vertical-normalized *ngSwitchCase=\"'charts-bar-vertical-normalized'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"result\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xAxisLabel\"\n   [yAxisLabel]=\"yAxisLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-vertical-normalized>\n  <ngx-charts-bar-horizontal *ngSwitchCase=\"'charts-bar-horizontal'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"result\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xAxisLabel\"\n   [yAxisLabel]=\"yAxisLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-horizontal>\n  <ngx-charts-bar-horizontal-normalized *ngSwitchCase=\"'charts-bar-horizontal-normalized'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"result\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xAxisLabel\"\n   [yAxisLabel]=\"yAxisLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-horizontal-normalized>\n</div>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <h4 class=\"m-auto\">\n    {{ name }}\n  </h4>\n</div>\n<div class=\"row px-2 pb-5\" [ngSwitch]=\"type\">\n  <ngx-charts-line-chart *ngSwitchCase=\"'Line'\"\n    [view]=\"view\"\n    [scheme]=\"colorScheme\"\n    [results]=\"data\"\n    [gradient]=\"gradient\"\n    [xAxis]=\"showXAxis\"\n    [yAxis]=\"showYAxis\"\n    [legend]=\"showLegend\"\n    [showXAxisLabel]=\"showXAxisLabel\"\n    [showYAxisLabel]=\"showYAxisLabel\"\n    [xAxisLabel]=\"xLabel\"\n    [yAxisLabel]=\"yLabel\"\n    (window:resize)=\"onResize($event)\"\n    (select)=\"onSelect($event)\">\n  </ngx-charts-line-chart>\n  <ngx-charts-bar-vertical *ngSwitchCase=\"'Bar-V'\"\n    [view]=\"view\"\n    [scheme]=\"colorScheme\"\n    [results]=\"data\"\n    [gradient]=\"gradient\"\n    [xAxis]=\"showXAxis\"\n    [yAxis]=\"showYAxis\"\n    [legend]=\"showLegend\"\n    [showXAxisLabel]=\"showXAxisLabel\"\n    [showYAxisLabel]=\"showYAxisLabel\"\n    [xAxisLabel]=\"xLabel\"\n    [yAxisLabel]=\"yLabel\"\n    (window:resize)=\"onResize($event)\"\n    (select)=\"onSelect($event)\">\n  </ngx-charts-bar-vertical>\n  <ngx-charts-bar-vertical-normalized *ngSwitchCase=\"'Bar-V-Norm'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"data\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xLabel\"\n   [yAxisLabel]=\"yLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-vertical-normalized>\n  <ngx-charts-bar-horizontal *ngSwitchCase=\"'Bar-H'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"data\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xLabel\"\n   [yAxisLabel]=\"yLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-horizontal>\n  <ngx-charts-bar-horizontal-normalized *ngSwitchCase=\"'Bar-H-Norm'\"\n   [view]=\"view\"\n   [scheme]=\"colorScheme\"\n   [results]=\"data\"\n   [gradient]=\"gradient\"\n   [xAxis]=\"showXAxis\"\n   [yAxis]=\"showYAxis\"\n   [legend]=\"showLegend\"\n   [showXAxisLabel]=\"showXAxisLabel\"\n   [showYAxisLabel]=\"showYAxisLabel\"\n   [xAxisLabel]=\"xLabel\"\n   [yAxisLabel]=\"yLabel\"\n   (window:resize)=\"onResize($event)\"\n   (select)=\"onSelect($event)\">\n  </ngx-charts-bar-horizontal-normalized>\n</div>\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/navbar/navbar.component.html": 
@@ -383,18 +383,37 @@
                     this.graphs = [];
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.graphs.push({ graph_name: 'Vertical Bar Chart', type: 'charts-bar-vertical', data: [] });
-                    this.graphs.push({ graph_name: 'Vertical Bar Chart Normalized', type: 'charts-bar-vertical-normalized', data: [] });
-                    this.graphs.push({ graph_name: 'Horizontal Bar Chart', type: 'charts-bar-horizontal', data: [] });
-                    this.graphs.push({ graph_name: 'Horizontal Bar Chart Normalized', type: 'charts-bar-horizontal-normalized', data: [] });
                     this.getGraphs();
                 };
                 AppComponent.prototype.setQuery = function (value) {
                     this.query = value;
                 };
                 AppComponent.prototype.getGraphs = function () {
-                    this.graphService.list().subscribe(function (data) {
-                        console.log(data);
+                    var _this = this;
+                    this.graphService.list().subscribe(function (response) {
+                        response.sort(function (a, b) { return (a.name > b.name) ? 1 : -1; });
+                        var lastGraph = null;
+                        response.forEach(function (graph) {
+                            var formattedData = [];
+                            graph.data.forEach(function (data) {
+                                data.graph = { name: graph.name, sub_name: graph.sub_name, description: graph.description,
+                                    type: graph.type, x_label: graph.x_label, y_label: graph.y_label, data: [], creation_date: graph.creation_date,
+                                    output_data: [] };
+                                formattedData.push({ name: data.key, value: data.value });
+                            });
+                            if (lastGraph != null && lastGraph.name === graph.name &&
+                                lastGraph.x_label === graph.x_label && lastGraph.y_label === graph.y_label) {
+                                lastGraph.data = lastGraph.data.concat(graph.data);
+                                lastGraph.output_data.push({ name: graph.sub_name, series: formattedData });
+                            }
+                            else {
+                                _this.graphs.push({ name: graph.name, sub_name: graph.sub_name, description: graph.description,
+                                    type: graph.type, x_label: graph.x_label, y_label: graph.y_label, data: graph.data, creation_date: graph.creation_date,
+                                    output_data: [{ name: graph.sub_name, series: formattedData }] });
+                            }
+                            lastGraph = _this.graphs[_this.graphs.length - 1];
+                        });
+                        console.log(_this.graphs);
                     }, function (error) { return console.error(error); }, function () { return console.log('Graphs loaded'); });
                 };
                 return AppComponent;
@@ -489,41 +508,16 @@
                     this.gradient = false;
                     this.showLegend = true;
                     this.showXAxisLabel = true;
-                    this.xAxisLabel = 'Country';
                     this.showYAxisLabel = true;
-                    this.yAxisLabel = 'Sales';
                     this.timeline = true;
+                    // pie
+                    this.showLabels = true;
                     this.colorScheme = {
                         domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
                     };
-                    // pie
-                    this.showLabels = true;
-                    // data goes here
-                    this.single = [
-                        { name: 'China', value: 2243772 },
-                        { name: 'USA', value: 1126000 },
-                        { name: 'Norway', value: 296215 },
-                        { name: 'Japan', value: 257363 },
-                        { name: 'Germany', value: 196750 },
-                        { name: 'France', value: 204617 }
-                    ];
-                    this.multi = [
-                        { name: 'China', series: [{ name: '2018', value: 2243772 }, { name: '2017', value: 1227770 }] },
-                        { name: 'USA', series: [{ name: '2018', value: 1126000 }, { name: '2017', value: 764666 }] },
-                        { name: 'Norway', series: [{ name: '2018', value: 296215 }, { name: '2017', value: 209122 }] },
-                        { name: 'Japan', series: [{ name: '2018', value: 257363 }, { name: '2017', value: 205350 }] },
-                        { name: 'Germany', series: [{ name: '2018', value: 196750 }, { name: '2017', value: 129246 }] },
-                        { name: 'France', series: [{ name: '2018', value: 204617 }, { name: '2017', value: 149797 }] }
-                    ];
                 }
                 GraphComponent.prototype.ngOnInit = function () {
                     this.resize();
-                    if (this.type.includes('normalized')) {
-                        this.result = this.multi;
-                    }
-                    else {
-                        this.result = this.single;
-                    }
                 };
                 GraphComponent.prototype.resize = function () {
                     var width;
@@ -537,7 +531,6 @@
                         height = width / 2;
                     }
                     this.view = [width, height];
-                    console.log(window.innerWidth);
                 };
                 GraphComponent.prototype.onResize = function (event) {
                     this.resize();
@@ -549,10 +542,22 @@
             }());
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-            ], GraphComponent.prototype, "graphName", void 0);
+            ], GraphComponent.prototype, "name", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], GraphComponent.prototype, "subName", void 0);
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
             ], GraphComponent.prototype, "type", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], GraphComponent.prototype, "xLabel", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], GraphComponent.prototype, "yLabel", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], GraphComponent.prototype, "data", void 0);
             GraphComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-graph',
@@ -620,12 +625,15 @@
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
             var GraphService = /** @class */ (function () {
                 function GraphService(http) {
                     this.http = http;
+                    this.getUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api + '/graphs/';
+                    this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
                 }
                 GraphService.prototype.list = function () {
-                    return this.http.get('/graphs');
+                    return this.http.get(this.getUrl, { headers: this.headers, withCredentials: true });
                 };
                 return GraphService;
             }());
@@ -653,7 +661,8 @@
             // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
             // The list of file replacements can be found in `angular.json`.
             var environment = {
-                production: false
+                production: false,
+                api: 'http://localhost:8000'
             };
             /*
              * For easier debugging in development mode, you can import the following file

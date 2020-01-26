@@ -46,11 +46,11 @@ export class GraphComponent implements OnInit {
     let width: number;
     let height: number;
 
-    if (window.innerWidth < 1366) {
-      width = window.innerWidth - 100;
+    if (window.innerWidth < 1200) {
+      width = window.innerWidth - 25;
       height = width / 2;
     } else {
-      width = (window.innerWidth / 2) - 100;
+      width = (window.innerWidth / 2) - 10;
       height = width / 2;
     }
     this.view = [width, height];
