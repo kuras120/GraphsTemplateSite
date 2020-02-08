@@ -28,7 +28,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filter: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filter: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col-xl-6 col-12\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/graph/graph.component.html": 
@@ -394,11 +394,14 @@
                         response.sort(function (a, b) { return (a.name > b.name) ? 1 : -1; });
                         var lastGraph = null;
                         response.forEach(function (graph) {
+                            graph.x_label = graph.x_label.toLowerCase();
+                            graph.y_label = graph.y_label.toLowerCase();
                             var formattedData = [];
                             graph.data.forEach(function (data) {
-                                data.graph = { name: graph.name, sub_name: graph.sub_name, description: graph.description,
-                                    type: graph.type, x_label: graph.x_label, y_label: graph.y_label, data: [], creation_date: graph.creation_date,
-                                    output_data: [] };
+                                var tempGraph = Object.assign({}, graph);
+                                tempGraph.data = [];
+                                tempGraph.output_data = [];
+                                data.graph = tempGraph;
                                 formattedData.push({ name: data.key, value: data.value });
                             });
                             if (lastGraph != null && lastGraph.name === graph.name &&
@@ -522,12 +525,12 @@
                 GraphComponent.prototype.resize = function () {
                     var width;
                     var height;
-                    if (window.innerWidth < 1366) {
-                        width = window.innerWidth - 100;
+                    if (window.innerWidth < 1200) {
+                        width = window.innerWidth - 25;
                         height = width / 2;
                     }
                     else {
-                        width = (window.innerWidth / 2) - 100;
+                        width = (window.innerWidth / 2) - 10;
                         height = width / 2;
                     }
                     this.view = [width, height];
