@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install python3 python3-venv nodejs npm
+sudo apt install python3 python3-pip python3-venv nodejs npm
 sudo npm install -g @angular/cli
 cd $(dirname $(readlink -f $0))/client
 npm install
