@@ -7,10 +7,18 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class GraphComponent implements OnInit {
   @Input()
-  graphName: string;
+  name: string;
+  @Input()
+  subName: string;
   @Input()
   type: string;
-  result: any[];
+  @Input()
+  xLabel: string;
+  @Input()
+  yLabel: string;
+  @Input()
+  data: [];
+
   view: any[];
 
   // options for the chart
@@ -19,59 +27,33 @@ export class GraphComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
   showYAxisLabel = true;
-  yAxisLabel = 'Sales';
   timeline = true;
+  // pie
+  showLabels = true;
 
   colorScheme = {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
   };
 
-  // pie
-  showLabels = true;
+  constructor() { }
 
-  // data goes here
-  public single = [
-    {name: 'China', value: 2243772},
-    {name: 'USA', value: 1126000},
-    {name: 'Norway', value: 296215},
-    {name: 'Japan', value: 257363},
-    {name: 'Germany', value: 196750},
-    {name: 'France', value: 204617}
-  ];
-
-  public multi = [
-    {name: 'China', series: [{name: '2018', value: 2243772}, {name: '2017', value: 1227770}]},
-    {name: 'USA', series: [{name: '2018', value: 1126000}, {name: '2017', value: 764666}]},
-    {name: 'Norway', series: [{name: '2018', value: 296215}, {name: '2017', value: 209122}]},
-    {name: 'Japan', series: [{name: '2018', value: 257363}, {name: '2017', value: 205350}]},
-    {name: 'Germany', series: [{name: '2018', value: 196750}, {name: '2017', value: 129246}]},
-    {name: 'France', series: [{name: '2018', value: 204617}, {name: '2017', value: 149797}]}
-  ];
+  ngOnInit(): void {
+    this.resize();
+  }
 
   resize() {
     let width: number;
     let height: number;
 
-    if (window.innerWidth < 1366) {
-      width = window.innerWidth - 100;
+    if (window.innerWidth < 1200) {
+      width = window.innerWidth - 25;
       height = width / 2;
     } else {
-      width = (window.innerWidth / 2) - 100;
+      width = (window.innerWidth / 2) - 10;
       height = width / 2;
     }
     this.view = [width, height];
-    console.log(window.innerWidth);
-  }
-
-  ngOnInit(): void {
-    this.resize();
-    if (this.type.includes('normalized')) {
-      this.result = this.multi;
-    } else {
-      this.result = this.single;
-    }
   }
 
   onResize(event) {

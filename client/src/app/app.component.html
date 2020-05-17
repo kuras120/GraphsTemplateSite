@@ -9,11 +9,12 @@
     <div class="col-12">
       <div class="row">
         <h3 class="text-secondary p-5 m-auto">
-          Plug-in electric vehicle Selling Countries
+          Different interesting graphs
         </h3>
       </div>
     </div>
-    <app-graph *ngFor="let graph of graphs | filter: query" [graphName] = "graph.graph_name" [type]="graph.type" class="col"></app-graph>
+    <app-graph *ngFor="let graph of graphs | filter: query" [name] = "graph.name" [subName]="graph.sub_name"
+               [type]="graph.type" [xLabel]="graph.x_label" [yLabel]="graph.y_label" [data]="graph.output_data" class="col-xl-6 col-12"></app-graph>
   </div>
   <div class="d-flex d-md-none">
     <div class="row m-auto">
