@@ -1,7 +1,7 @@
-django
-gunicorn
-whitenoise
-dj-database-url
-psycopg2-binary
-django-cors-headers
-djangorestframework
+django #framework
+gunicorn #deployment
+drf-yasg #swagger
+whitenoise #staticfiles
+django-cors-headers #cors
+djangorestframework #rest
+djangorestframework-simplejwt #JWT

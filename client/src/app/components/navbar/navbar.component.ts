@@ -6,15 +6,16 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   @Output() queryEmitter = new EventEmitter<string>();
   query: string;
+
   constructor() { }
 
-  onChange(event) {
+  onChange(_event: any) {
     this.queryEmitter.emit(this.query);
     console.log(this.query);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

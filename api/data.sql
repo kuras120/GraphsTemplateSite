@@ -9,7 +9,7 @@ VALUES (1, 'Wycieczki', 'Jazda na rowerze', 'Górska wycieczka - test prędkośc
         'Line', '2016-12-30 21:46:12', 'iteracja', 'koszt');
 INSERT INTO storage_data (id, key, value, graph_id)
 VALUES (1, 1.5, 3, 1),
-       (2, 2, 5.2, 1),
+       (2, 3, 5.2, 1),
        (3, 5.5, 4.3, 1),
        (4, 6, 2, 1),
        (5, 10, 0, 1),

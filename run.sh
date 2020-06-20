@@ -8,5 +8,4 @@ source env/bin/activate
 cd api || exit
 python manage.py makemigrations
 python manage.py migrate
-sqlite3 db.sqlite3 < data.sql
 python manage.py runserver 8000

@@ -11,6 +11,8 @@ class Graph(models.Model):
     y_label = models.CharField(max_length=16)
     creation_date = models.DateTimeField()
 
+    objects = models.Manager()
+
     def __str__(self):
         return str(self.name) + ' - ' + str(self.sub_name)
 
@@ -19,6 +21,8 @@ class Data(models.Model):
     key = models.FloatField()
     value = models.FloatField()
     graph = models.ForeignKey(Graph, related_name='data', on_delete=models.CASCADE)
+
+    objects = models.Manager()
 
     def __str__(self):
         return '(' + str(self.key) + ',' + str(self.value) + ')'

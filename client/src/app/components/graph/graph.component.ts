@@ -6,6 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
+  
   @Input()
   name: string;
   @Input()
@@ -29,8 +30,6 @@ export class GraphComponent implements OnInit {
   showXAxisLabel = true;
   showYAxisLabel = true;
   timeline = true;
-  // pie
-  showLabels = true;
 
   colorScheme = {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
@@ -38,7 +37,7 @@ export class GraphComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.resize();
   }
 
@@ -56,11 +55,11 @@ export class GraphComponent implements OnInit {
     this.view = [width, height];
   }
 
-  onResize(event) {
+  onResize(_event: any) {
     this.resize();
   }
 
-  onSelect(event: {}) {
+  onSelect(_event: any) {
     console.log('clicked');
   }
 }
