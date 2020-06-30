@@ -32,7 +32,7 @@ export class AuthService {
     return obj;
   }
 
-  login(username: string, password: string): Observable<string> {
+  authenticate(username: string, password: string): Observable<string> {
     return this.http.post<any>(`${environment.api}/token/`, { username, password })
     .pipe(map(token => {
       localStorage.setItem('token', token.access);
@@ -41,7 +41,7 @@ export class AuthService {
     }));
   }
 
-  logout() {
+  clear() {
     localStorage.removeItem('token');
     this.tokenSubject.next(null);
   }
