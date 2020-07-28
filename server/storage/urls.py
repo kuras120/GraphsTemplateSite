@@ -6,6 +6,7 @@ router = routers.SimpleRouter()
 router.register('api/graphs', views.GraphViewSet)
 
 urlpatterns = [
-    path('', views.HomePageView.as_view())
+    path('', views.HomePageView.as_view()),
+    path('login/', views.HomePageView.as_view())
 ]
 urlpatterns += router.urls

@@ -32,7 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>");
+/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>\n<!--<button (click)=\"makeRequest()\">BIG RED BUTTON</button>-->\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>login works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row vh-100 d-flex align-items-center\">\n    <div class=\"col-md-6 d-none d-md-block\">\n      <img class=\"img-responsive\" style=\"border-right: 1px solid black\"\n           src=\"static/assets/knowgraphs.png\" width=\"100%\" height=\"100%\" />\n    </div>\n    <div class=\"col-md-6 col-12\">\n      <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input id=\"username\" type=\"text\" formControlName=\"username\" class=\"form-control\"\n                 [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" />\n          <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\n            <div *ngIf=\"f.username.errors.required\">Username is required</div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input id=\"password\" type=\"password\" formControlName=\"password\" class=\"form-control\"\n                 [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n          <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n            <div *ngIf=\"f.password.errors.required\">Password is required</div>\n          </div>\n        </div>\n        <button [disabled]=\"loading\" class=\"btn btn-primary\">\n          <span *ngIf=\"loading\" class=\"spinner-border spinner-border-sm mr-1\"></span>\n          Login\n        </button>\n        <div *ngIf=\"error\" class=\"alert alert-danger mt-3 mb-0\">{{error}}</div>\n      </form>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\n  <button class=\"navbar-toggler collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <input class=\"form-control mr-sm-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">*Know Graphs*</a>\n  <button class=\"navbar-toggler collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <input class=\"form-control my-2 mr-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n    <button class=\"btn btn-outline-dark my-2\" (click)=\"logout()\">Logout</button>\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -116,7 +116,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    ngOnInit() { }
+    // private access: string;
+    // constructor(private http: HttpClient, private cookie: CookieService) { }
+    ngOnInit() {
+        //   this.http.post('http://localhost:8080/api/authenticate', {
+        //       email: 'dupa11@gmail.com',
+        //       expirationDate: 1626286772000,
+        //       subscriptionType: ['Ogłoszenia', 'Spółdzielnie'],
+        //       apiKey: '6TBwlxIpsy0NPWExe5H6'
+        //     },
+        //     { observe: 'response', withCredentials: true }
+        //   )
+        //     .subscribe(data => {
+        //       console.log(data);
+        //     });
+        // }
+        //
+        // makeRequest() {
+        //   const headers = new HttpHeaders()
+        //       .set('Authorization',  'Bearer ' + this.cookie.get('MonitorApiToken'))
+        //   this.http.get('http://localhost:8080/api/1',
+        //     { observe: 'response', withCredentials: true, headers }
+        //   )
+        //     .subscribe(data => {
+        //       console.log(data);
+        //     });
+    }
 };
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -190,7 +215,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
             ngx_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["FilterPipeModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"]
         ],
         providers: [
             { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HTTP_INTERCEPTORS"], useClass: _security_jwt_interceptor__WEBPACK_IMPORTED_MODULE_10__["JwtInterceptor"], multi: true },
@@ -216,24 +242,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/dashboard/dashboard.component */ "./src/app/components/dashboard/dashboard.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _security_auth_guard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./security/auth.guard */ "./src/app/security/auth.guard.ts");
+/* harmony import */ var _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/dashboard/dashboard.component */ "./src/app/components/dashboard/dashboard.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
 
 
 
 
 
 const routes = [
-    // , canActivate: [AuthGuard]
-    { path: '', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
+    { path: '', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__["DashboardComponent"], canActivate: [_security_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]] },
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
     { path: '**', redirectTo: '' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
 AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     })
@@ -424,13 +451,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
 
 
 let LoginComponent = class LoginComponent {
-    constructor() { }
+    constructor(formBuilder, route, router, authService) {
+        this.formBuilder = formBuilder;
+        this.route = route;
+        this.router = router;
+        this.authService = authService;
+        this.loading = false;
+        this.submitted = false;
+        this.error = '';
+        if (this.authService.tokenValue) {
+            this.router.navigate(['/']).then();
+        }
+    }
     ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+        });
+    }
+    get f() { return this.loginForm.controls; }
+    onSubmit() {
+        this.submitted = true;
+        if (this.loginForm.invalid) {
+            return;
+        }
+        this.loading = true;
+        this.authService.authenticate(this.f.username.value, this.f.password.value)
+            .subscribe(() => {
+            this.router.navigate(['/']).then();
+        }, error => {
+            this.error = error;
+            this.loading = false;
+        });
     }
 };
+LoginComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] }
+];
 LoginComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-login',
@@ -468,11 +537,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
 
 
 let NavbarComponent = class NavbarComponent {
-    constructor() {
+    constructor(authService) {
+        this.authService = authService;
         this.queryEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    logout() {
+        this.authService.clear();
+        location.reload();
     }
     onChange(_event) {
         this.queryEmitter.emit(this.query);
@@ -480,6 +556,9 @@ let NavbarComponent = class NavbarComponent {
     }
     ngOnInit() { }
 };
+NavbarComponent.ctorParameters = () => [
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] }
+];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
 ], NavbarComponent.prototype, "queryEmitter", void 0);
@@ -490,6 +569,52 @@ NavbarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./navbar.component.css */ "./src/app/components/navbar/navbar.component.css")).default]
     })
 ], NavbarComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/security/auth.guard.ts":
+/*!****************************************!*\
+  !*** ./src/app/security/auth.guard.ts ***!
+  \****************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(router, authService) {
+        this.router = router;
+        this.authService = authService;
+    }
+    canActivate(next, state) {
+        const token = this.authService.tokenValue;
+        if (token) {
+            return true;
+        }
+        this.router.navigate(['/login']).then();
+        return false;
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
+];
+AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
 
 
 
@@ -521,11 +646,11 @@ let ErrorInterceptor = class ErrorInterceptor {
     }
     intercept(request, next) {
         return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(err => {
-            if (err.status === 401) {
-                this.authService.logout();
-                location.reload(true);
+            if (err.status === 401 && this.authService.tokenValue) {
+                this.authService.clear();
+                location.reload();
             }
-            const error = err.message || err.statusText;
+            const error = err.statusText || err.message;
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
         }));
     }
@@ -563,6 +688,7 @@ let JwtInterceptor = class JwtInterceptor {
     }
     intercept(request, next) {
         const token = this.authService.tokenValue;
+        console.log(token);
         if (token) {
             request = request.clone({
                 setHeaders: {
@@ -609,21 +735,33 @@ __webpack_require__.r(__webpack_exports__);
 let AuthService = class AuthService {
     constructor(http) {
         this.http = http;
-        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('token')));
+        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](localStorage.getItem('token'));
         this.token = this.tokenSubject.asObservable();
     }
     get tokenValue() {
         return this.tokenSubject.value;
     }
-    login(username, password) {
-        return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/authenticate`, { username, password })
+    static toObject(token) {
+        if (token == null)
+            return null;
+        const divided = token.split('.');
+        if (divided.length !== 3)
+            return null;
+        const obj = {};
+        obj.header = JSON.parse(atob(divided[0]));
+        obj.payload = JSON.parse(atob(divided[1]));
+        obj.signature = divided[2];
+        return obj;
+    }
+    authenticate(username, password) {
+        return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/token/`, { username, password })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(token => {
-            localStorage.setItem('token', JSON.stringify(token));
-            this.tokenSubject.next(token);
-            return token;
+            localStorage.setItem('token', token.access);
+            this.tokenSubject.next(token.access);
+            return token.access;
         }));
     }
-    logout() {
+    clear() {
         localStorage.removeItem('token');
         this.tokenSubject.next(null);
     }
@@ -664,7 +802,7 @@ let GraphService = class GraphService {
         this.http = http;
     }
     list() {
-        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api}/api/graphs/`)
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api}/graphs/`)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => {
             let graphs = [];
             response.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -727,7 +865,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    api: 'http://localhost:8000'
+    api: 'http://localhost:8000/api'
 };
 /*
  * For easier debugging in development mode, you can import the following file

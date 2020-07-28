@@ -2,6 +2,7 @@ django #framework
 gunicorn #deployment
 drf-yasg #swagger
 whitenoise #staticfiles
+dj-database-url #db manager
 django-cors-headers #cors
 djangorestframework #rest
 djangorestframework-simplejwt #JWT

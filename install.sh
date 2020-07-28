@@ -6,10 +6,12 @@ npm install
 cd ..
 python3 -m venv env
 source env/bin/activate
-cd api || exit
+cd server || exit
 pip install wheel
 pip install --upgrade pip
 pip install -r requirements.txt
+touch db.sqlite3
+python manage.py migrate
 sqlite3 db.sqlite3 < data.sql
 export DJANGO_SUPERUSER_USERNAME=admin1
 export DJANGO_SUPERUSER_PASSWORD=ADmin12#$

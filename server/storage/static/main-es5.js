@@ -51,7 +51,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<router-outlet></router-outlet>";
+    __webpack_exports__["default"] = "<router-outlet></router-outlet>\n<!--<button (click)=\"makeRequest()\">BIG RED BUTTON</button>-->\n";
     /***/
   },
 
@@ -111,7 +111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p>login works!</p>\n";
+    __webpack_exports__["default"] = "<div class=\"container\">\n  <div class=\"row vh-100 d-flex align-items-center\">\n    <div class=\"col-md-6 d-none d-md-block\">\n      <img class=\"img-responsive\" style=\"border-right: 1px solid black\"\n           src=\"static/assets/knowgraphs.png\" width=\"100%\" height=\"100%\" />\n    </div>\n    <div class=\"col-md-6 col-12\">\n      <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n        <div class=\"form-group\">\n          <label for=\"username\">Username</label>\n          <input id=\"username\" type=\"text\" formControlName=\"username\" class=\"form-control\"\n                 [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" />\n          <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\n            <div *ngIf=\"f.username.errors.required\">Username is required</div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input id=\"password\" type=\"password\" formControlName=\"password\" class=\"form-control\"\n                 [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n          <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n            <div *ngIf=\"f.password.errors.required\">Password is required</div>\n          </div>\n        </div>\n        <button [disabled]=\"loading\" class=\"btn btn-primary\">\n          <span *ngIf=\"loading\" class=\"spinner-border spinner-border-sm mr-1\"></span>\n          Login\n        </button>\n        <div *ngIf=\"error\" class=\"alert alert-danger mt-3 mb-0\">{{error}}</div>\n      </form>\n    </div>\n  </div>\n</div>\n";
     /***/
   },
 
@@ -131,7 +131,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\n  <button class=\"navbar-toggler collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <input class=\"form-control mr-sm-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n  </div>\n</nav>\n";
+    __webpack_exports__["default"] = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">*Know Graphs*</a>\n  <button class=\"navbar-toggler collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <input class=\"form-control my-2 mr-2\" type=\"search\" name=\"search\" placeholder=\"Search\" aria-label=\"Search\" [(ngModel)]=\"query\" (ngModelChange)=\"onChange($event)\">\n    <button class=\"btn btn-outline-dark my-2\" (click)=\"logout()\">Logout</button>\n  </div>\n</nav>\n";
     /***/
   },
 
@@ -194,7 +194,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(AppComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        // private access: string;
+        // constructor(private http: HttpClient, private cookie: CookieService) { }
+        value: function ngOnInit() {//   this.http.post('http://localhost:8080/api/authenticate', {
+          //       email: 'dupa11@gmail.com',
+          //       expirationDate: 1626286772000,
+          //       subscriptionType: ['Ogłoszenia', 'Spółdzielnie'],
+          //       apiKey: '6TBwlxIpsy0NPWExe5H6'
+          //     },
+          //     { observe: 'response', withCredentials: true }
+          //   )
+          //     .subscribe(data => {
+          //       console.log(data);
+          //     });
+          // }
+          //
+          // makeRequest() {
+          //   const headers = new HttpHeaders()
+          //       .set('Authorization',  'Bearer ' + this.cookie.get('MonitorApiToken'))
+          //   this.http.get('http://localhost:8080/api/1',
+          //     { observe: 'response', withCredentials: true, headers }
+          //   )
+          //     .subscribe(data => {
+          //       console.log(data);
+          //     });
+        }
       }]);
 
       return AppComponent;
@@ -334,7 +358,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _components_login_login_component__WEBPACK_IMPORTED_MODULE_14__["LoginComponent"], _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_13__["DashboardComponent"], _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_6__["NavbarComponent"], _components_graph_graph_component__WEBPACK_IMPORTED_MODULE_7__["GraphComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__["NgxChartsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"], ngx_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["FilterPipeModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"], _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_5__["NgxChartsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"], ngx_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["FilterPipeModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"]],
       providers: [{
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HTTP_INTERCEPTORS"],
         useClass: _security_jwt_interceptor__WEBPACK_IMPORTED_MODULE_10__["JwtInterceptor"],
@@ -383,29 +407,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _security_auth_guard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./security/auth.guard */
+    "./src/app/security/auth.guard.ts");
+    /* harmony import */
+
+
+    var _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./components/dashboard/dashboard.component */
     "./src/app/components/dashboard/dashboard.component.ts");
     /* harmony import */
 
 
-    var _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./components/login/login.component */
     "./src/app/components/login/login.component.ts");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 
-    var routes = [// , canActivate: [AuthGuard]
-    {
+    var routes = [{
       path: '',
-      component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"]
+      component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__["DashboardComponent"],
+      canActivate: [_security_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
     }, {
       path: 'login',
-      component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"]
+      component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"]
     }, {
       path: '**',
       redirectTo: ''
@@ -415,7 +445,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, AppRoutingModule);
     };
 
-    AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
+    AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
       imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
       exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     })], AppRoutingModule);
@@ -711,19 +741,90 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../../services/auth.service */
+    "./src/app/services/auth.service.ts");
 
     var LoginComponent = /*#__PURE__*/function () {
-      function LoginComponent() {
+      function LoginComponent(formBuilder, route, router, authService) {
         _classCallCheck(this, LoginComponent);
+
+        this.formBuilder = formBuilder;
+        this.route = route;
+        this.router = router;
+        this.authService = authService;
+        this.loading = false;
+        this.submitted = false;
+        this.error = '';
+
+        if (this.authService.tokenValue) {
+          this.router.navigate(['/']).then();
+        }
       }
 
       _createClass(LoginComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          this.loginForm = this.formBuilder.group({
+            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+          });
+        }
+      }, {
+        key: "onSubmit",
+        value: function onSubmit() {
+          var _this2 = this;
+
+          this.submitted = true;
+
+          if (this.loginForm.invalid) {
+            return;
+          }
+
+          this.loading = true;
+          this.authService.authenticate(this.f.username.value, this.f.password.value).subscribe(function () {
+            _this2.router.navigate(['/']).then();
+          }, function (error) {
+            _this2.error = error;
+            _this2.loading = false;
+          });
+        }
+      }, {
+        key: "f",
+        get: function get() {
+          return this.loginForm.controls;
+        }
       }]);
 
       return LoginComponent;
     }();
+
+    LoginComponent.ctorParameters = function () {
+      return [{
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]
+      }];
+    };
 
     LoginComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-login',
@@ -788,15 +889,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../services/auth.service */
+    "./src/app/services/auth.service.ts");
 
     var NavbarComponent = /*#__PURE__*/function () {
-      function NavbarComponent() {
+      function NavbarComponent(authService) {
         _classCallCheck(this, NavbarComponent);
 
+        this.authService = authService;
         this.queryEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
       }
 
       _createClass(NavbarComponent, [{
+        key: "logout",
+        value: function logout() {
+          this.authService.clear();
+          location.reload();
+        }
+      }, {
         key: "onChange",
         value: function onChange(_event) {
           this.queryEmitter.emit(this.query);
@@ -810,6 +924,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return NavbarComponent;
     }();
 
+    NavbarComponent.ctorParameters = function () {
+      return [{
+        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+      }];
+    };
+
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()], NavbarComponent.prototype, "queryEmitter", void 0);
     NavbarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-navbar',
@@ -820,6 +940,89 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       /*! ./navbar.component.css */
       "./src/app/components/navbar/navbar.component.css"))["default"]]
     })], NavbarComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/security/auth.guard.ts":
+  /*!****************************************!*\
+    !*** ./src/app/security/auth.guard.ts ***!
+    \****************************************/
+
+  /*! exports provided: AuthGuard */
+
+  /***/
+  function srcAppSecurityAuthGuardTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AuthGuard", function () {
+      return AuthGuard;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../services/auth.service */
+    "./src/app/services/auth.service.ts");
+
+    var AuthGuard = /*#__PURE__*/function () {
+      function AuthGuard(router, authService) {
+        _classCallCheck(this, AuthGuard);
+
+        this.router = router;
+        this.authService = authService;
+      }
+
+      _createClass(AuthGuard, [{
+        key: "canActivate",
+        value: function canActivate(next, state) {
+          var token = this.authService.tokenValue;
+
+          if (token) {
+            return true;
+          }
+
+          this.router.navigate(['/login']).then();
+          return false;
+        }
+      }]);
+
+      return AuthGuard;
+    }();
+
+    AuthGuard.ctorParameters = function () {
+      return [{
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }, {
+        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }];
+    };
+
+    AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], AuthGuard);
     /***/
   },
 
@@ -883,16 +1086,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ErrorInterceptor, [{
         key: "intercept",
         value: function intercept(request, next) {
-          var _this2 = this;
+          var _this3 = this;
 
           return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
-            if (err.status === 401) {
-              _this2.authService.logout();
+            if (err.status === 401 && _this3.authService.tokenValue) {
+              _this3.authService.clear();
 
-              location.reload(true);
+              location.reload();
             }
 
-            var error = err.message || err.statusText;
+            var error = err.statusText || err.message;
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
           }));
         }
@@ -960,6 +1163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "intercept",
         value: function intercept(request, next) {
           var token = this.authService.tokenValue;
+          console.log(token);
 
           if (token) {
             request = request.clone({
@@ -1047,29 +1251,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, AuthService);
 
         this.http = http;
-        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('token')));
+        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](localStorage.getItem('token'));
         this.token = this.tokenSubject.asObservable();
       }
 
       _createClass(AuthService, [{
-        key: "login",
-        value: function login(username, password) {
-          var _this3 = this;
+        key: "authenticate",
+        value: function authenticate(username, password) {
+          var _this4 = this;
 
-          return this.http.post("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api, "/authenticate"), {
+          return this.http.post("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api, "/token/"), {
             username: username,
             password: password
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (token) {
-            localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('token', token.access);
 
-            _this3.tokenSubject.next(token);
+            _this4.tokenSubject.next(token.access);
 
-            return token;
+            return token.access;
           }));
         }
       }, {
-        key: "logout",
-        value: function logout() {
+        key: "clear",
+        value: function clear() {
           localStorage.removeItem('token');
           this.tokenSubject.next(null);
         }
@@ -1077,6 +1281,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "tokenValue",
         get: function get() {
           return this.tokenSubject.value;
+        }
+      }], [{
+        key: "toObject",
+        value: function toObject(token) {
+          if (token == null) return null;
+          var divided = token.split('.');
+          if (divided.length !== 3) return null;
+          var obj = {};
+          obj.header = JSON.parse(atob(divided[0]));
+          obj.payload = JSON.parse(atob(divided[1]));
+          obj.signature = divided[2];
+          return obj;
         }
       }]);
 
@@ -1155,7 +1371,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(GraphService, [{
         key: "list",
         value: function list() {
-          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api, "/api/graphs/")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api, "/graphs/")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             var graphs = [];
             response.sort(function (a, b) {
               return a.name > b.name ? 1 : -1;
@@ -1247,7 +1463,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var environment = {
       production: false,
-      api: 'http://localhost:8000'
+      api: 'http://localhost:8000/api'
     };
     /*
      * For easier debugging in development mode, you can import the following file
