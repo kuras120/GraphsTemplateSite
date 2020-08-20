@@ -37,7 +37,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
+    path('favicon.ico', RedirectView.as_view(url='/staticfiles/favicon.ico', permanent=True)),
     path('api/token/', obtain_jwt_token, name='token_obtain_pair'),
     path('api/token/refresh/', refresh_jwt_token, name='token_refresh'),
     path('api/token/verify/', verify_jwt_token, name='token_verify'),

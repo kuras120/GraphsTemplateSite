@@ -39,8 +39,8 @@ export class AuthService {
   authenticate(username: string, password: string): Observable<string> {
     return this.http.post<any>(`${environment.api}/token/`, { username, password })
     .pipe(map(token => {
-      this.cookieService.set('token', token.access);
-      this.tokenSubject.next(token.access);
+      this.cookieService.set('token', token);
+      this.tokenSubject.next(token);
       return token.access;
     }));
   }

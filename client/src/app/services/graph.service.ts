@@ -14,7 +14,7 @@ export class GraphService {
   list() {
     return this.http.get<Graph[]>(`${environment.api}/graphs/`)
     .pipe(map(response => {
-      let graphs: Graph[] = [];
+      const graphs: Graph[] = [];
       response.sort((a, b) => (a.name > b.name) ? 1 : -1);
       let lastGraph: Graph = null;
       response.forEach(graph => {
