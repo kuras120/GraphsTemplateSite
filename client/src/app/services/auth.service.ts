@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {Token} from '../models/token.model';
 import { environment } from 'src/environments/environment';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,8 +13,11 @@ export class AuthService {
   public token: Observable<string>;
   private tokenSubject: BehaviorSubject<string>;
 
-  constructor(private http: HttpClient) {
-    this.tokenSubject = new BehaviorSubject<string>(localStorage.getItem('token'));
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {
+    this.tokenSubject = new BehaviorSubject<string>(cookieService.get('token'));
     this.token = this.tokenSubject.asObservable();
   }
 
@@ -35,14 +39,14 @@ export class AuthService {
   authenticate(username: string, password: string): Observable<string> {
     return this.http.post<any>(`${environment.api}/token/`, { username, password })
     .pipe(map(token => {
-      localStorage.setItem('token', token.access);
+      this.cookieService.set('token', token.access);
       this.tokenSubject.next(token.access);
       return token.access;
     }));
   }
 
   clear() {
-    localStorage.removeItem('token');
+    this.cookieService.delete('token');
     this.tokenSubject.next(null);
   }
 }

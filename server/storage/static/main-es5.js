@@ -194,31 +194,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(AppComponent, [{
         key: "ngOnInit",
-        // private access: string;
-        // constructor(private http: HttpClient, private cookie: CookieService) { }
-        value: function ngOnInit() {//   this.http.post('http://localhost:8080/api/authenticate', {
-          //       email: 'dupa11@gmail.com',
-          //       expirationDate: 1626286772000,
-          //       subscriptionType: ['Ogłoszenia', 'Spółdzielnie'],
-          //       apiKey: '6TBwlxIpsy0NPWExe5H6'
-          //     },
-          //     { observe: 'response', withCredentials: true }
-          //   )
-          //     .subscribe(data => {
-          //       console.log(data);
-          //     });
-          // }
-          //
-          // makeRequest() {
-          //   const headers = new HttpHeaders()
-          //       .set('Authorization',  'Bearer ' + this.cookie.get('MonitorApiToken'))
-          //   this.http.get('http://localhost:8080/api/1',
-          //     { observe: 'response', withCredentials: true, headers }
-          //   )
-          //     .subscribe(data => {
-          //       console.log(data);
-          //     });
-        }
+        value: function ngOnInit() {}
       }]);
 
       return AppComponent;
@@ -1163,7 +1139,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "intercept",
         value: function intercept(request, next) {
           var token = this.authService.tokenValue;
-          console.log(token);
 
           if (token) {
             request = request.clone({
@@ -1245,13 +1220,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ngx-cookie-service */
+    "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(http) {
+      function AuthService(http, cookieService) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
-        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](localStorage.getItem('token'));
+        this.cookieService = cookieService;
+        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](cookieService.get('token'));
         this.token = this.tokenSubject.asObservable();
       }
 
@@ -1264,7 +1246,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             username: username,
             password: password
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (token) {
-            localStorage.setItem('token', token.access);
+            _this4.cookieService.set('token', token.access);
 
             _this4.tokenSubject.next(token.access);
 
@@ -1274,7 +1256,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clear",
         value: function clear() {
-          localStorage.removeItem('token');
+          this.cookieService["delete"]('token');
           this.tokenSubject.next(null);
         }
       }, {
@@ -1302,6 +1284,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     AuthService.ctorParameters = function () {
       return [{
         type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }, {
+        type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__["CookieService"]
       }];
     };
 
@@ -1417,7 +1401,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               lastGraph = graphs[graphs.length - 1];
             });
-            console.log(graphs);
             return graphs;
           }));
         }

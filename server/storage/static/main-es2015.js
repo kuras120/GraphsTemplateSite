@@ -116,32 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    // private access: string;
-    // constructor(private http: HttpClient, private cookie: CookieService) { }
-    ngOnInit() {
-        //   this.http.post('http://localhost:8080/api/authenticate', {
-        //       email: 'dupa11@gmail.com',
-        //       expirationDate: 1626286772000,
-        //       subscriptionType: ['Ogłoszenia', 'Spółdzielnie'],
-        //       apiKey: '6TBwlxIpsy0NPWExe5H6'
-        //     },
-        //     { observe: 'response', withCredentials: true }
-        //   )
-        //     .subscribe(data => {
-        //       console.log(data);
-        //     });
-        // }
-        //
-        // makeRequest() {
-        //   const headers = new HttpHeaders()
-        //       .set('Authorization',  'Bearer ' + this.cookie.get('MonitorApiToken'))
-        //   this.http.get('http://localhost:8080/api/1',
-        //     { observe: 'response', withCredentials: true, headers }
-        //   )
-        //     .subscribe(data => {
-        //       console.log(data);
-        //     });
-    }
+    ngOnInit() { }
 };
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -688,7 +663,6 @@ let JwtInterceptor = class JwtInterceptor {
     }
     intercept(request, next) {
         const token = this.authService.tokenValue;
-        console.log(token);
         if (token) {
             request = request.clone({
                 setHeaders: {
@@ -726,6 +700,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
+
 
 
 
@@ -733,9 +709,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthService = class AuthService {
-    constructor(http) {
+    constructor(http, cookieService) {
         this.http = http;
-        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](localStorage.getItem('token'));
+        this.cookieService = cookieService;
+        this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](cookieService.get('token'));
         this.token = this.tokenSubject.asObservable();
     }
     get tokenValue() {
@@ -756,18 +733,19 @@ let AuthService = class AuthService {
     authenticate(username, password) {
         return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/token/`, { username, password })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(token => {
-            localStorage.setItem('token', token.access);
+            this.cookieService.set('token', token.access);
             this.tokenSubject.next(token.access);
             return token.access;
         }));
     }
     clear() {
-        localStorage.removeItem('token');
+        this.cookieService.delete('token');
         this.tokenSubject.next(null);
     }
 };
 AuthService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+    { type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__["CookieService"] }
 ];
 AuthService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' })
@@ -832,7 +810,6 @@ let GraphService = class GraphService {
                 }
                 lastGraph = graphs[graphs.length - 1];
             });
-            console.log(graphs);
             return graphs;
         }));
     }

@@ -42,7 +42,6 @@ export class GraphService {
         }
         lastGraph = graphs[graphs.length - 1];
       });
-      console.log(graphs);
       return graphs;
     }));
   }

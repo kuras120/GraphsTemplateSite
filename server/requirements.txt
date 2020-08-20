@@ -5,4 +5,4 @@ whitenoise #staticfiles
 dj-database-url #db manager
 django-cors-headers #cors
 djangorestframework #rest
-djangorestframework-simplejwt #JWT
+djangorestframework-jwt #JWT
