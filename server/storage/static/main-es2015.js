@@ -664,11 +664,7 @@ let JwtInterceptor = class JwtInterceptor {
     intercept(request, next) {
         const token = this.authService.tokenValue;
         if (token) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            request = request.clone({ withCredentials: true });
         }
         return next.handle(request);
     }
@@ -732,10 +728,10 @@ let AuthService = class AuthService {
     }
     authenticate(username, password) {
         return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/token/`, { username, password })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(token => {
-            this.cookieService.set('token', token.access);
-            this.tokenSubject.next(token.access);
-            return token.access;
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(data => {
+            this.cookieService.set('token', data.token);
+            this.tokenSubject.next(data.token);
+            return data.token;
         }));
     }
     clear() {
@@ -782,7 +778,7 @@ let GraphService = class GraphService {
     list() {
         return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api}/graphs/`)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => {
-            let graphs = [];
+            const graphs = [];
             response.sort((a, b) => (a.name > b.name) ? 1 : -1);
             let lastGraph = null;
             response.forEach(graph => {

@@ -1142,9 +1142,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (token) {
             request = request.clone({
-              setHeaders: {
-                Authorization: "Bearer ".concat(token)
-              }
+              withCredentials: true
             });
           }
 
@@ -1245,12 +1243,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.http.post("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api, "/token/"), {
             username: username,
             password: password
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (token) {
-            _this4.cookieService.set('token', token.access);
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
+            _this4.cookieService.set('token', data.token);
 
-            _this4.tokenSubject.next(token.access);
+            _this4.tokenSubject.next(data.token);
 
-            return token.access;
+            return data.token;
           }));
         }
       }, {

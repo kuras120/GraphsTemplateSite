@@ -38,10 +38,10 @@ export class AuthService {
 
   authenticate(username: string, password: string): Observable<string> {
     return this.http.post<any>(`${environment.api}/token/`, { username, password })
-    .pipe(map(token => {
-      this.cookieService.set('token', token);
-      this.tokenSubject.next(token);
-      return token.access;
+    .pipe(map(data => {
+      this.cookieService.set('token', data.token);
+      this.tokenSubject.next(data.token);
+      return data.token;
     }));
   }
 
