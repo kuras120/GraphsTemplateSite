@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">*Know Graphs*</a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -12,6 +12,7 @@
         <a class="nav-link" href="#">Link</a>
       </li>
     </ul>
-    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search" [(ngModel)]="query" (ngModelChange)="onChange($event)">
+    <input class="form-control my-2 mr-2" type="search" name="search" placeholder="Search" aria-label="Search" [(ngModel)]="query" (ngModelChange)="onChange($event)">
+    <button class="btn btn-outline-dark my-2" (click)="logout()">Logout</button>
   </div>
 </nav>

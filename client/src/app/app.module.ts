@@ -1,32 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GraphComponent } from './components/graph/graph.component';
-import {FormsModule} from '@angular/forms';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { JwtInterceptor } from './security/jwt.interceptor';
+import { ErrorInterceptor } from './security/error.interceptor';
+import { AppRoutingModule } from './app.routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    DashboardComponent,
     NavbarComponent,
-    GraphComponent,
+    GraphComponent
   ],
-  imports: [
-    BrowserModule,
-    // AppRoutingModule,
-    NgxChartsModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    Ng2SearchPipeModule,
-    HttpClientModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgxChartsModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        FilterPipeModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,15 +7,22 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   @Output() queryEmitter = new EventEmitter<string>();
   query: string;
-  constructor() { }
 
-  onChange(event) {
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  logout() {
+    this.authService.clear();
+    location.reload();
+  }
+
+  onChange(_event: any) {
     this.queryEmitter.emit(this.query);
-    console.log(this.query);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }
