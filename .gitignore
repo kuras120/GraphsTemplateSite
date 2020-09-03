@@ -128,3 +128,5 @@ dmypy.json
 
 # staticfiles
 staticfiles/
+server/storage/static/*
+!server/storage/static/favicon.ico
