@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
 
   onChange(_event: any) {
     this.queryEmitter.emit(this.query);
-    console.log(this.query);
   }
 
   ngOnInit() { }

@@ -71,7 +71,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filterBy: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col-xl-6 col-12\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n";
+    __webpack_exports__["default"] = "<button [hidden]=\"true\" data-toggle=\"modal\" data-target=\"#refreshToken\"\n        data-backdrop=\"static\" data-keyboard=\"false\" #refreshToken></button>\n<div class=\"modal fade\" id=\"refreshToken\" tabindex=\"-1\" role=\"dialog\"\n     aria-labelledby=\"refreshTokenLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-dialog-scrollable\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"refreshTokenLabel\">Time's UP!</h5>\n        <button [hidden]=\"true\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" #closeModal>\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        {{ remainingTime }}\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"getNewToken()\"> > I need more time < </button>\n      </div>\n    </div>\n  </div>\n</div>\n<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filterBy: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col-xl-6 col-12\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n";
     /***/
   },
 
@@ -485,12 +485,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var src_app_services_graph_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! src/app/services/graph.service */
     "./src/app/services/graph.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/services/auth.service */
+    "./src/app/services/auth.service.ts");
 
     var DashboardComponent = /*#__PURE__*/function () {
-      function DashboardComponent(graphService) {
+      function DashboardComponent(graphService, authService) {
         _classCallCheck(this, DashboardComponent);
 
         this.graphService = graphService;
+        this.authService = authService;
         this.title = 'Graphs Template Site';
         this.query = {
           name: ''
@@ -501,6 +508,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "ngOnInit",
         value: function ngOnInit() {
           this.getGraphs();
+          this.subscribeNewTimer();
+        }
+      }, {
+        key: "subscribeNewTimer",
+        value: function subscribeNewTimer() {
+          var _this = this;
+
+          this.show = false;
+          this.timer = this.authService.timer.subscribe(function (remainingTime) {
+            if (!remainingTime) {
+              _this.authService.clear();
+
+              location.reload();
+            }
+
+            if (remainingTime <= 10 && !_this.show) {
+              _this.show = !_this.show;
+
+              _this.refreshToken.nativeElement.click();
+            }
+
+            _this.remainingTime = remainingTime;
+          });
         }
       }, {
         key: "setQuery",
@@ -510,14 +540,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGraphs",
         value: function getGraphs() {
-          var _this = this;
+          var _this2 = this;
 
           this.graphService.list().subscribe(function (response) {
-            _this.graphs = response;
+            _this2.graphs = response;
           }, function (error) {
             return console.error(error);
           }, function () {
             return console.log('Graphs loaded');
+          });
+        }
+      }, {
+        key: "getNewToken",
+        value: function getNewToken() {
+          var _this3 = this;
+
+          this.authService.refresh().subscribe(function () {
+            _this3.timer.unsubscribe();
+
+            _this3.closeModal.nativeElement.click();
+
+            _this3.subscribeNewTimer();
+          }, function () {
+            _this3.authService.clear();
+
+            location.reload();
           });
         }
       }]);
@@ -528,9 +575,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     DashboardComponent.ctorParameters = function () {
       return [{
         type: src_app_services_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"]
+      }, {
+        type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
       }];
     };
 
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('refreshToken')], DashboardComponent.prototype, "refreshToken", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('closeModal')], DashboardComponent.prototype, "closeModal", void 0);
     DashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-dashboard',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
@@ -764,7 +815,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this2 = this;
+          var _this4 = this;
 
           this.submitted = true;
 
@@ -774,10 +825,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.loading = true;
           this.authService.authenticate(this.f.username.value, this.f.password.value).subscribe(function () {
-            _this2.router.navigate(['/']).then();
+            _this4.router.navigate(['/']).then();
           }, function (error) {
-            _this2.error = error;
-            _this2.loading = false;
+            _this4.error = error;
+            _this4.loading = false;
           });
         }
       }, {
@@ -890,7 +941,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "onChange",
         value: function onChange(_event) {
           this.queryEmitter.emit(this.query);
-          console.log(this.query);
         }
       }, {
         key: "ngOnInit",
@@ -1062,11 +1112,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ErrorInterceptor, [{
         key: "intercept",
         value: function intercept(request, next) {
-          var _this3 = this;
+          var _this5 = this;
 
           return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
-            if (err.status === 401 && _this3.authService.tokenValue) {
-              _this3.authService.clear();
+            if (err.status === 401 && _this5.authService.tokenValue) {
+              _this5.authService.clear();
 
               location.reload();
             }
@@ -1225,30 +1275,50 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! ngx-cookie-service */
     "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
 
-    var AuthService = /*#__PURE__*/function () {
+    var AuthService_1;
+
+    var AuthService = AuthService_1 = /*#__PURE__*/function () {
       function AuthService(http, cookieService) {
         _classCallCheck(this, AuthService);
 
         this.http = http;
         this.cookieService = cookieService;
         this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](cookieService.get('token'));
+        this.countdown = this.setTimer(cookieService.get('token'));
         this.token = this.tokenSubject.asObservable();
       }
 
       _createClass(AuthService, [{
+        key: "setTimer",
+        value: function setTimer(cookie) {
+          if (cookie) {
+            var remainingTime = AuthService_1.toObject(cookie).payload.exp - Math.floor(Date.now() / 1000);
+            return remainingTime > 0 ? Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, 1000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(remainingTime), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function () {
+              return --remainingTime;
+            })) : null;
+          }
+        }
+      }, {
         key: "authenticate",
         value: function authenticate(username, password) {
-          var _this4 = this;
+          var _this6 = this;
 
           return this.http.post("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api, "/token/"), {
             username: username,
             password: password
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-            _this4.cookieService.set('token', data.token);
+            return _this6.initializeVariables(data);
+          }));
+        }
+      }, {
+        key: "refresh",
+        value: function refresh() {
+          var _this7 = this;
 
-            _this4.tokenSubject.next(data.token);
-
-            return data.token;
+          return this.http.post("".concat(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api, "/token/refresh/"), {
+            token: this.tokenValue
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
+            return _this7.initializeVariables(data);
           }));
         }
       }, {
@@ -1256,6 +1326,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function clear() {
           this.cookieService["delete"]('token');
           this.tokenSubject.next(null);
+        }
+      }, {
+        key: "initializeVariables",
+        value: function initializeVariables(data) {
+          this.cookieService.set('token', data.token);
+          this.tokenSubject.next(data.token);
+          this.countdown = this.setTimer(data.token);
+          return data.token;
+        }
+      }, {
+        key: "timer",
+        get: function get() {
+          return this.countdown;
         }
       }, {
         key: "tokenValue",
@@ -1287,7 +1370,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }];
     };
 
-    AuthService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+    AuthService = AuthService_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
     })], AuthService);
     /***/

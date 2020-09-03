@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filterBy: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col-xl-6 col-12\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<button [hidden]=\"true\" data-toggle=\"modal\" data-target=\"#refreshToken\"\n        data-backdrop=\"static\" data-keyboard=\"false\" #refreshToken></button>\n<div class=\"modal fade\" id=\"refreshToken\" tabindex=\"-1\" role=\"dialog\"\n     aria-labelledby=\"refreshTokenLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-dialog-scrollable\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"refreshTokenLabel\">Time's UP!</h5>\n        <button [hidden]=\"true\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" #closeModal>\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        {{ remainingTime }}\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"getNewToken()\"> > I need more time < </button>\n      </div>\n    </div>\n  </div>\n</div>\n<app-navbar (queryEmitter)=\"setQuery($event)\"></app-navbar>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <h1 class=\"card-header bg-info text-center w-100\">\n      Welcome to {{ title }}!\n    </h1>\n  </div>\n  <div class=\"d-none d-md-flex row\">\n    <div class=\"col-12\">\n      <div class=\"row\">\n        <h3 class=\"text-secondary p-5 m-auto\">\n          Different interesting graphs\n        </h3>\n      </div>\n    </div>\n    <app-graph *ngFor=\"let graph of graphs | filterBy: query\" [name] = \"graph.name\" [subName]=\"graph.sub_name\"\n               [type]=\"graph.type\" [xLabel]=\"graph.x_label\" [yLabel]=\"graph.y_label\" [data]=\"graph.output_data\" class=\"col-xl-6 col-12\"></app-graph>\n  </div>\n  <div class=\"d-flex d-md-none\">\n    <div class=\"row m-auto\">\n      Sorry, charts available only on wide screen\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -271,17 +271,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var src_app_services_graph_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/graph.service */ "./src/app/services/graph.service.ts");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
+
 
 
 
 let DashboardComponent = class DashboardComponent {
-    constructor(graphService) {
+    constructor(graphService, authService) {
         this.graphService = graphService;
+        this.authService = authService;
         this.title = 'Graphs Template Site';
         this.query = { name: '' };
     }
     ngOnInit() {
         this.getGraphs();
+        this.subscribeNewTimer();
+    }
+    subscribeNewTimer() {
+        this.show = false;
+        this.timer = this.authService.timer.subscribe(remainingTime => {
+            if (!remainingTime) {
+                this.authService.clear();
+                location.reload();
+            }
+            if (remainingTime <= 10 && !this.show) {
+                this.show = !this.show;
+                this.refreshToken.nativeElement.click();
+            }
+            this.remainingTime = remainingTime;
+        });
     }
     setQuery(value) {
         this.query.name = value;
@@ -291,10 +309,27 @@ let DashboardComponent = class DashboardComponent {
             this.graphs = response;
         }, error => console.error(error), () => console.log('Graphs loaded'));
     }
+    getNewToken() {
+        this.authService.refresh().subscribe(() => {
+            this.timer.unsubscribe();
+            this.closeModal.nativeElement.click();
+            this.subscribeNewTimer();
+        }, () => {
+            this.authService.clear();
+            location.reload();
+        });
+    }
 };
 DashboardComponent.ctorParameters = () => [
-    { type: src_app_services_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"] }
+    { type: src_app_services_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"] },
+    { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
 ];
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('refreshToken')
+], DashboardComponent.prototype, "refreshToken", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('closeModal')
+], DashboardComponent.prototype, "closeModal", void 0);
 DashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-dashboard',
@@ -527,7 +562,6 @@ let NavbarComponent = class NavbarComponent {
     }
     onChange(_event) {
         this.queryEmitter.emit(this.query);
-        console.log(this.query);
     }
     ngOnInit() { }
 };
@@ -697,6 +731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/__ivy_ngcc__/fesm2015/ngx-cookie-service.js");
+var AuthService_1;
 
 
 
@@ -704,12 +739,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let AuthService = class AuthService {
+let AuthService = AuthService_1 = class AuthService {
     constructor(http, cookieService) {
         this.http = http;
         this.cookieService = cookieService;
         this.tokenSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](cookieService.get('token'));
+        this.countdown = this.setTimer(cookieService.get('token'));
         this.token = this.tokenSubject.asObservable();
+    }
+    get timer() {
+        return this.countdown;
     }
     get tokenValue() {
         return this.tokenSubject.value;
@@ -726,24 +765,40 @@ let AuthService = class AuthService {
         obj.signature = divided[2];
         return obj;
     }
+    setTimer(cookie) {
+        if (cookie) {
+            let remainingTime = AuthService_1.toObject(cookie).payload.exp - Math.floor(Date.now() / 1000);
+            return remainingTime > 0 ? Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, 1000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(remainingTime), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(() => --remainingTime)) : null;
+        }
+    }
     authenticate(username, password) {
         return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/token/`, { username, password })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(data => {
-            this.cookieService.set('token', data.token);
-            this.tokenSubject.next(data.token);
-            return data.token;
+            return this.initializeVariables(data);
+        }));
+    }
+    refresh() {
+        return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api}/token/refresh/`, { token: this.tokenValue })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(data => {
+            return this.initializeVariables(data);
         }));
     }
     clear() {
         this.cookieService.delete('token');
         this.tokenSubject.next(null);
     }
+    initializeVariables(data) {
+        this.cookieService.set('token', data.token);
+        this.tokenSubject.next(data.token);
+        this.countdown = this.setTimer(data.token);
+        return data.token;
+    }
 };
 AuthService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
     { type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_6__["CookieService"] }
 ];
-AuthService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+AuthService = AuthService_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' })
 ], AuthService);
 

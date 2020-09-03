@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Graph } from 'src/app/models/graph.model';
 import { GraphService } from 'src/app/services/graph.service';
+import {AuthService} from 'src/app/services/auth.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +15,36 @@ export class DashboardComponent implements OnInit {
   query = { name: '' };
   graphs: Graph[];
 
-  constructor(private graphService: GraphService) { }
+  show: boolean;
+  timer: Subscription;
+  remainingTime: number;
+
+  @ViewChild('refreshToken') refreshToken;
+  @ViewChild('closeModal') closeModal;
+
+  constructor(
+    private graphService: GraphService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.getGraphs();
+    this.subscribeNewTimer();
+  }
+
+  subscribeNewTimer() {
+    this.show = false;
+    this.timer = this.authService.timer.subscribe(remainingTime => {
+      if (!remainingTime) {
+        this.authService.clear();
+        location.reload();
+      }
+      if (remainingTime <= 10 && !this.show) {
+        this.show = !this.show;
+        this.refreshToken.nativeElement.click();
+      }
+      this.remainingTime = remainingTime;
+    });
   }
 
   setQuery(value: string) {
@@ -31,5 +59,19 @@ export class DashboardComponent implements OnInit {
       error => console.error(error),
       () => console.log('Graphs loaded')
     );
+  }
+
+  getNewToken() {
+    this.authService.refresh().subscribe(
+      () => {
+        this.timer.unsubscribe();
+        this.closeModal.nativeElement.click();
+        this.subscribeNewTimer();
+      },
+      () => {
+        this.authService.clear();
+        location.reload();
+      }
+    )
   }
 }
