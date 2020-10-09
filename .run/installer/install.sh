@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt install python3 python3-pip python3-venv nodejs npm
 sudo npm install -g @angular/cli@9.1.7 npm-check-updates
-cd "$(dirname "$(readlink -f "$0")")"/client || exit
+cd "$(dirname "$(readlink -f "$0")")"/../../client || exit
 npm install
 cd ..
 python3 -m venv env

@@ -4,6 +4,6 @@ drf-yasg #swagger
 whitenoise #staticfiles
 dj-database-url #db manager
 django-cors-headers #cors
-djangorestframework #rest
+djangorestframework == 3.11.1 #rest
 djangorestframework-jwt #JWT
 rabbitmq-server #MQ

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd "$(dirname "$(readlink -f "$0")")"/client || exit
+cd "$(dirname "$(readlink -f "$0")")"/../../client || exit
 ng build
 cp dist/client/*.js ../server/storage/static
 cp dist/client/*.js.map ../server/storage/static
