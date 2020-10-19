@@ -1,19 +1,26 @@
 #!/bin/bash
+path="$(dirname "$(readlink -f "$0")")"
+client="$path"/../../client
+server="$path"/../../server
+env="$path"/../../env
+
 sudo apt install python3 python3-pip python3-venv nodejs npm
 sudo npm install -g @angular/cli@9.1.7 npm-check-updates
-cd "$(dirname "$(readlink -f "$0")")"/../../client || exit
-npm install
-cd ..
-python3 -m venv env
-source env/bin/activate
-cd server || exit
-pip install wheel
-pip install --upgrade pip
-pip install -r requirements.txt
-touch db.sqlite3
-python manage.py migrate
-sqlite3 db.sqlite3 < data.sql
+npm install --prefix "$client"
+python3 -m venv "$env"
+
+# shellcheck source=/dev/null
+source "$env"/bin/activate
+pip install --install-option="--prefix=$server" wheel
+pip install --install-option="--prefix=$server" --upgrade pip
+pip install --install-option="--prefix=$server" -r requirements.txt
+
+touch "$server"/db.sqlite3
+python "$server"/manage.py migrate
+sqlite3 "$server"/db.sqlite3 < "$server"/data.sql
+
 export DJANGO_SUPERUSER_USERNAME=admin1
 export DJANGO_SUPERUSER_PASSWORD=ADmin12#$
 export DJANGO_SUPERUSER_EMAIL=admin1@gmail.com
-python manage.py createsuperuser --noinput
+
+python "$server"/manage.py createsuperuser --noinput

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, Observable, timer} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {Token} from '../models/token.model';
-import { environment } from 'src/environments/environment';
 import {CookieService} from 'ngx-cookie-service';
 
 
@@ -53,14 +52,14 @@ export class AuthService {
   }
 
   public authenticate(username: string, password: string): Observable<string> {
-    return this.http.post<any>(`${environment.api}/token/`, { username, password })
+    return this.http.post<any>(`/api/token/`, { username, password })
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
   }
 
   public refresh(): Observable<string> {
-    return this.http.post<any>(`${environment.api}/token/refresh/`, { token: this.tokenValue })
+    return this.http.post<any>(`/api/token/refresh/`, { token: this.tokenValue })
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
