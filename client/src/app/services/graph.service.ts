@@ -12,7 +12,7 @@ export class GraphService {
   constructor(private http: HttpClient) { }
 
   list() {
-    return this.http.get<Graph[]>(`${environment.api}/graphs/`)
+    return this.http.get<Graph[]>(`/api/graphs/`)
     .pipe(map(response => {
       const graphs: Graph[] = [];
       response.sort((a, b) => (a.name > b.name) ? 1 : -1);
