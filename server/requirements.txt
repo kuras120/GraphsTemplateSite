@@ -6,4 +6,5 @@ dj-database-url #db manager
 django-cors-headers #cors
 djangorestframework == 3.11.1 #rest
 djangorestframework-jwt #JWT
-rabbitmq-server #MQ
+psycopg2 #postgresql
+# rabbitmq-server #MQ

@@ -20,12 +20,47 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sbjo$do-0ihw-=u-fnzix=ci24&0n!xoy%mk$muce-)h+bnfkk'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='sbjo$do-0ihw-=u-fnzix=ci24&0n!xoy%mk$muce-)h+bnfkk')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", '0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
+ALLOWED_HOSTS += os.environ.get('DJANGO_ALLOWED_HOSTS', default='').split()
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:4200',
+    'http://localhost:4200',
+    'http://0.0.0.0:4200',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'http://0.0.0.0:8000'
+]
+CORS_ORIGIN_WHITELIST += os.environ.get('DJANGO_CORS_ORIGIN_WHITELIST', default='').split()
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT'
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Access-Control-Allow-Origin'
+)
 
 # Application definition
 
@@ -74,38 +109,6 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }
 
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_WHITELIST = (
-    'http://127.0.0.1:4200',
-    'http://localhost:4200',
-    'http://0.0.0.0:4200',
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'http://0.0.0.0:8000'
-)
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT'
-)
-
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'Access-Control-Allow-Origin'
-)
 
 ROOT_URLCONF = 'entrypoint.urls'
 
@@ -134,8 +137,12 @@ WSGI_APPLICATION = 'entrypoint.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': os.environ.get('SQL_DATABASE', default=os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.environ.get('SQL_USER', 'admin1'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'ADmin12#$'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432')
     }
 }
 

@@ -1,5 +1,5 @@
-DELETE FROM storage_graph;
 DELETE FROM storage_data;
+DELETE FROM storage_graph;
 INSERT INTO storage_graph (id, name, sub_name, description, type, creation_date, x_label, y_label)
 VALUES (1, 'Wycieczki', 'Jazda na rowerze', 'Górska wycieczka - test prędkości',
         'Line', '2014-10-23 15:21:07', 'czas', 'prędkość'),
