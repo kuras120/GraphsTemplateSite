@@ -6,11 +6,10 @@ services:
       context: ..
       dockerfile: ./docker/${DOCKER_FILE}
     command: gunicorn --bind 0.0.0.0:8000 --chdir ./server entrypoint.wsgi:application
-#    volumes:
-#      - ../server:/app/server
-#      - ../client:/app/client
-    ports:
-      - 8000:8000
+#    ports:
+#      - 8000:8000
+    expose:
+      - 8000
     environment:
       - SQL_USER=${DB_USER}
       - SQL_PASSWORD=${DB_PASSWORD}
@@ -32,5 +31,13 @@ services:
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_PASSWORD}
       - PGDATABASE=${DB_NAME}
+  nginx:
+    build:
+      context: ..
+      dockerfile: ./docker/${DOCKER_FILE_NGINX}
+    ports:
+      - 80:80
+    depends_on:
+      - web
 volumes:
   postgres_data:

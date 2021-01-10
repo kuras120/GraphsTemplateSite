@@ -6,13 +6,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GraphComponent } from './components/graph/graph.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule} from '@angular/common/http';
 import { JwtInterceptor } from './security/jwt.interceptor';
 import { ErrorInterceptor } from './security/error.interceptor';
 import { AppRoutingModule } from './app.routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import {ErrorComponent} from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    GraphComponent
+    GraphComponent,
+    ErrorComponent
   ],
     imports: [
         BrowserModule,
@@ -30,7 +32,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
         FormsModule,
         FilterPipeModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientXsrfModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

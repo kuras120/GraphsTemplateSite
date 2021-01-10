@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Graph} from '../models/graph.model';
-import {environment} from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({

@@ -5,7 +5,7 @@
            src="static/assets/knowgraphs.png" width="100%" height="100%" />
     </div>
     <div class="col-md-6 col-12">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm">
         <div class="form-group">
           <label for="username">Username</label>
           <input id="username" type="text" formControlName="username" class="form-control"
@@ -22,9 +22,13 @@
             <div *ngIf="f.password.errors.required">Password is required</div>
           </div>
         </div>
-        <button [disabled]="loading" class="btn btn-primary">
+        <button type="submit" (click)="onSubmit(false)" [disabled]="loading" class="btn btn-primary">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Login
+        </button>
+        <button type="button" (click)="onSubmit(true)" [disabled]="loading" class="btn btn-primary" style="margin-left: 5px">
+          <span *ngIf="loading" class="mr-1"></span>
+          Register
         </button>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
       </form>

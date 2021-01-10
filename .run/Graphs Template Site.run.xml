@@ -6,6 +6,7 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_SETTINGS_MODULE" value="entrypoint.settings" />
+      <env name="DEBUG" value="0" />
     </envs>
     <option name="SDK_HOME" value="$USER_HOME$/Apps/anaconda3/envs/GraphsTemplateSite/bin/python" />
     <option name="WORKING_DIRECTORY" value="" />
