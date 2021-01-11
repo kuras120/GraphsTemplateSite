@@ -49,7 +49,7 @@ export class GraphComponent implements OnInit {
       width = window.innerWidth - 25;
       height = width / 2;
     } else {
-      width = (window.innerWidth / 2) - 10;
+      width = (window.innerWidth / 2) - 50;
       height = width / 2;
     }
     this.view = [width, height];

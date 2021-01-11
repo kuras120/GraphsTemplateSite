@@ -19,7 +19,7 @@
     (window:resize)="onResize($event)"
     (select)="onSelect($event)">
   </ngx-charts-line-chart>
-  <ngx-charts-bar-vertical *ngSwitchCase="'Bar-V'"
+  <ngx-charts-polar-chart *ngSwitchCase="'Polar'"
     [view]="view"
     [scheme]="colorScheme"
     [results]="data"
@@ -33,8 +33,8 @@
     [yAxisLabel]="yLabel"
     (window:resize)="onResize($event)"
     (select)="onSelect($event)">
-  </ngx-charts-bar-vertical>
-  <ngx-charts-bar-vertical-normalized *ngSwitchCase="'Bar-V-Norm'"
+  </ngx-charts-polar-chart>
+  <ngx-charts-area-chart *ngSwitchCase="'Area'"
    [view]="view"
    [scheme]="colorScheme"
    [results]="data"
@@ -48,35 +48,5 @@
    [yAxisLabel]="yLabel"
    (window:resize)="onResize($event)"
    (select)="onSelect($event)">
-  </ngx-charts-bar-vertical-normalized>
-  <ngx-charts-bar-horizontal *ngSwitchCase="'Bar-H'"
-   [view]="view"
-   [scheme]="colorScheme"
-   [results]="data"
-   [gradient]="gradient"
-   [xAxis]="showXAxis"
-   [yAxis]="showYAxis"
-   [legend]="showLegend"
-   [showXAxisLabel]="showXAxisLabel"
-   [showYAxisLabel]="showYAxisLabel"
-   [xAxisLabel]="xLabel"
-   [yAxisLabel]="yLabel"
-   (window:resize)="onResize($event)"
-   (select)="onSelect($event)">
-  </ngx-charts-bar-horizontal>
-  <ngx-charts-bar-horizontal-normalized *ngSwitchCase="'Bar-H-Norm'"
-   [view]="view"
-   [scheme]="colorScheme"
-   [results]="data"
-   [gradient]="gradient"
-   [xAxis]="showXAxis"
-   [yAxis]="showYAxis"
-   [legend]="showLegend"
-   [showXAxisLabel]="showXAxisLabel"
-   [showYAxisLabel]="showYAxisLabel"
-   [xAxisLabel]="xLabel"
-   [yAxisLabel]="yLabel"
-   (window:resize)="onResize($event)"
-   (select)="onSelect($event)">
-  </ngx-charts-bar-horizontal-normalized>
+  </ngx-charts-area-chart>
 </div>
