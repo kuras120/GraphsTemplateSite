@@ -3,9 +3,9 @@ version: '3.7'
 services:
   web:
     build:
-      context: ..
-      dockerfile: ./docker/${DOCKER_FILE}
-    command: gunicorn --bind 0.0.0.0:8000 --chdir ./server entrypoint.wsgi:application
+      context: ../..
+      dockerfile: docker/dev/web.dockerfile
+    command: gunicorn --bind 0.0.0.0:8000 --chdir server entrypoint.wsgi:application
 #    ports:
 #      - 8000:8000
     expose:
@@ -15,13 +15,13 @@ services:
       - SQL_PASSWORD=${DB_PASSWORD}
       - SQL_DATABASE=${DB_NAME}
     env_file:
-      - ./dev/web.dev.env
+      - .env
     depends_on:
       - db
   db:
     build:
-      context: ..
-      dockerfile: ./docker/${DOCKER_FILE_PG}
+      context: ../..
+      dockerfile: docker/dev/pg.dockerfile
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
@@ -31,13 +31,5 @@ services:
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_PASSWORD}
       - PGDATABASE=${DB_NAME}
-  nginx:
-    build:
-      context: ..
-      dockerfile: ./docker/${DOCKER_FILE_NGINX}
-    ports:
-      - 80:80
-    depends_on:
-      - web
 volumes:
   postgres_data:
