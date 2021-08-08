@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getGraphs() {
-    this.graphService.list().subscribe(
+    this.graphService.getGraphs().subscribe(
       response => {
         this.graphs = response;
       },

@@ -1,12 +1,10 @@
+from rest_framework import views
 from django.db import transaction
-from rest_framework import views
-from rest_framework import serializers
-from rest_framework import views
 from rest_framework import viewsets
-from rest_framework.decorators import permission_classes, renderer_classes, api_view
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework import serializers
 from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.decorators import permission_classes, authentication_classes, renderer_classes, api_view
 
 from storage import models
 
@@ -15,6 +13,7 @@ from storage import models
 
 
 @renderer_classes([TemplateHTMLRenderer])
+@authentication_classes([])
 @permission_classes([])
 class HomePageView(views.APIView):
     """
@@ -28,6 +27,7 @@ class HomePageView(views.APIView):
 
 
 @api_view(['GET'])
+@authentication_classes([])
 @permission_classes([])
 def clear(request):
     response = Response(status=200)
@@ -87,21 +87,18 @@ class GraphSerializer(serializers.ModelSerializer):
         return graph
 
 
-@permission_classes([IsAuthenticated])
 class DataViewSet(viewsets.ModelViewSet):
     serializer_class = DataSerializer
     queryset = models.Data.objects.all()
     http_method_names = []
 
 
-@permission_classes([IsAuthenticated])
 class StatisticsViewSet(viewsets.ModelViewSet):
     serializer_class = StatisticsSerializer
     queryset = models.Statistics.objects.all()
     http_method_names = []
 
 
-@permission_classes([IsAuthenticated])
 class GraphViewSet(viewsets.ModelViewSet):
     """
     CRUD for graphs

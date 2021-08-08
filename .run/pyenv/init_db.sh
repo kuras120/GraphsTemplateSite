@@ -1,6 +1,7 @@
 #!/bin/bash
 server=$1
 
+rm "$server"/db.sqlite3
 touch "$server"/db.sqlite3
 python "$server"/manage.py makemigrations
 python "$server"/manage.py migrate

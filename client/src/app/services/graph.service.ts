@@ -10,7 +10,7 @@ export class GraphService {
 
   constructor(private http: HttpClient) { }
 
-  list() {
+  getGraphs() {
     return this.http.get<Graph[]>(`/api/graphs/`)
     .pipe(map(response => {
       const graphs: Graph[] = [];
