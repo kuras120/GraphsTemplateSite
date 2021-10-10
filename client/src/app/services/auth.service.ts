@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, throwError, timer} from 'rxjs';
-import {catchError, map, take} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, timer} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 import {Token} from '../models/token.model';
 import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
