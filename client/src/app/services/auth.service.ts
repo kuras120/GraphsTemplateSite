@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   public verify() {
-    return this.http.post<any>(`/api/token/verify/`, {})
+    return this.http.post<any>(`/auth/token/verify/`, {})
       .pipe(map(data => {
         if (data.token) {
           this.initializeVariables(data);
@@ -66,21 +66,21 @@ export class AuthService {
   }
 
   public authenticate(username: string, password: string, isRegister: boolean): Observable<string> {
-    return this.http.post<any>(`/api/token/`, { username, password, register: isRegister })
+    return this.http.post<any>(`/auth/token/`, { username, password, register: isRegister })
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
   }
 
   public refresh(): Observable<string> {
-    return this.http.post<any>(`/api/token/refresh/`, {})
+    return this.http.post<any>(`/auth/token/refresh/`, {})
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
   }
 
   public clear() {
-    return this.http.get<any>(`/api/token/revoke/`)
+    return this.http.get<any>(`/auth/token/revoke/`)
       .pipe(map(() => {console.log('logout')}));
     // this.cookieService.delete('ACCESS-TOKEN');
     // this.tokenSubject.next(null);

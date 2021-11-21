@@ -92,9 +92,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/staticfiles/favicon.ico', permanent=True)),
-    path('api/token/', ExtendedObtainJWT.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', refresh_jwt_token, name='token_refresh'),
-    path('api/token/verify/', verify_jwt_token, name='token_verify'),
+    path('auth/token/', ExtendedObtainJWT.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh/', refresh_jwt_token, name='token_refresh'),
+    path('auth/token/verify/', verify_jwt_token, name='token_verify'),
     url('swagger(<format>.json|.yaml)/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
