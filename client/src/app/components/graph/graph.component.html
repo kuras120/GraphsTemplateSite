@@ -16,6 +16,8 @@
     [showYAxisLabel]="showYAxisLabel"
     [xAxisLabel]="xLabel"
     [yAxisLabel]="yLabel"
+    [roundDomains]=true
+    [autoScale]=true
     (window:resize)="onResize($event)"
     (select)="onSelect($event)">
   </ngx-charts-line-chart>
