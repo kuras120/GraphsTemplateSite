@@ -4,7 +4,7 @@
   </h4>
 </div>
 <div class="row mx-5 pb-5" [ngSwitch]="type">
-  <ngx-charts-line-chart *ngSwitchCase="'Line'"
+  <ngx-charts-line-chart *ngSwitchCase="'Line'" style="height: 400px !important;"
     [scheme]="colorScheme"
     [results]="data"
     [gradient]="gradient"
@@ -20,7 +20,7 @@
     [autoScale]=true
     (select)="onSelect($event)">
   </ngx-charts-line-chart>
-  <ngx-charts-polar-chart *ngSwitchCase="'Polar'"
+  <ngx-charts-polar-chart *ngSwitchCase="'Polar'" style="height: 400px !important;"
     [scheme]="colorScheme"
     [results]="data"
     [gradient]="gradient"
@@ -35,7 +35,7 @@
     [autoScale]=true
     (select)="onSelect($event)">
   </ngx-charts-polar-chart>
-  <ngx-charts-area-chart *ngSwitchCase="'Area'"
+  <ngx-charts-area-chart *ngSwitchCase="'Area'" style="height: 400px !important;"
     [scheme]="colorScheme"
     [results]="data"
     [gradient]="gradient"
