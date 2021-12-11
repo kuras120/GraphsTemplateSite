@@ -3,9 +3,24 @@
     {{ name }}
   </h4>
 </div>
-<div class="row px-2 pb-5" [ngSwitch]="type">
+<div class="row mx-5 pb-5" [ngSwitch]="type">
   <ngx-charts-line-chart *ngSwitchCase="'Line'"
-    [view]="view"
+    [scheme]="colorScheme"
+    [results]="data"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xLabel"
+    [yAxisLabel]="yLabel"
+    [timeline]="timeline"
+    [roundDomains]=true
+    [autoScale]=true
+    (select)="onSelect($event)">
+  </ngx-charts-line-chart>
+  <ngx-charts-polar-chart *ngSwitchCase="'Polar'"
     [scheme]="colorScheme"
     [results]="data"
     [gradient]="gradient"
@@ -18,11 +33,9 @@
     [yAxisLabel]="yLabel"
     [roundDomains]=true
     [autoScale]=true
-    (window:resize)="onResize($event)"
     (select)="onSelect($event)">
-  </ngx-charts-line-chart>
-  <ngx-charts-polar-chart *ngSwitchCase="'Polar'"
-    [view]="view"
+  </ngx-charts-polar-chart>
+  <ngx-charts-area-chart *ngSwitchCase="'Area'"
     [scheme]="colorScheme"
     [results]="data"
     [gradient]="gradient"
@@ -33,22 +46,9 @@
     [showYAxisLabel]="showYAxisLabel"
     [xAxisLabel]="xLabel"
     [yAxisLabel]="yLabel"
-    (window:resize)="onResize($event)"
+    [timeline]="timeline"
+    [roundDomains]=true
+    [autoScale]=true
     (select)="onSelect($event)">
-  </ngx-charts-polar-chart>
-  <ngx-charts-area-chart *ngSwitchCase="'Area'"
-   [view]="view"
-   [scheme]="colorScheme"
-   [results]="data"
-   [gradient]="gradient"
-   [xAxis]="showXAxis"
-   [yAxis]="showYAxis"
-   [legend]="showLegend"
-   [showXAxisLabel]="showXAxisLabel"
-   [showYAxisLabel]="showYAxisLabel"
-   [xAxisLabel]="xLabel"
-   [yAxisLabel]="yLabel"
-   (window:resize)="onResize($event)"
-   (select)="onSelect($event)">
   </ngx-charts-area-chart>
 </div>
