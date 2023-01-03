@@ -11,3 +11,4 @@ docker-compose -f "$1"/docker-compose.yml exec web python /app/server/manage.py 
 docker-compose -f "$1"/docker-compose.yml exec web python /app/server/manage.py collectstatic --noinput
 docker-compose -f "$1"/docker-compose.yml exec web python /app/server/manage.py createsuperuser --noinput
 docker-compose -f "$1"/docker-compose.yml exec db psql -f /app/data.sql
+read -n 1 -s -r -p "Press any key to continue"

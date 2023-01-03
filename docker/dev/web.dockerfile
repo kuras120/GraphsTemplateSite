@@ -15,7 +15,7 @@ RUN npm install --prefix client
 RUN npm audit fix --prefix client
 RUN npm run build --prefix client
 
-RUN mkdir server/storage/static
+#RUN mkdir server/storage/static
 RUN cp client/dist/client/*.js server/storage/static
 RUN cp client/dist/client/*.css server/storage/static
 RUN cp -R client/dist/client/static/* server/storage/static
