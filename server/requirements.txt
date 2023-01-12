@@ -1,4 +1,4 @@
-django #framework
+django == 3.2.16 #framework
 gunicorn #deployment
 drf-yasg #swagger
 whitenoise #staticfiles
