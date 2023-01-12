@@ -6,8 +6,8 @@ services:
       context: ../..
       dockerfile: docker/dev/web.dockerfile
     command: gunicorn --bind 0.0.0.0:8000 --chdir server entrypoint.wsgi:application
-#    ports:
-#      - 8000:8000
+    ports:
+     - 8000:8000
     expose:
       - 8000
     environment:
