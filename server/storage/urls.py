@@ -8,6 +8,6 @@ router.register('api/data', views.DataViewSet)
 
 urlpatterns = [
     path('', views.HomePageView.as_view()),
-    path('api/token/revoke/', views.clear)
+    path('auth/token/revoke/', views.clear)
 ]
 urlpatterns += router.urls
