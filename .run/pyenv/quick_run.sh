@@ -5,7 +5,6 @@ url=$3
 port=$4
 
 npm run build --prefix "$client"
-mkdir "$server"/storage/static
 cp "$client"/dist/client/*.js "$server"/storage/static
 cp "$client"/dist/client/*.css "$server"/storage/static
 cp -R "$client"/dist/client/static/* "$server"/storage/static
