@@ -10,9 +10,9 @@ import {AuthService} from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  error = '';
+  loading: boolean;
+  submitted: boolean;
+  error: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,9 +20,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    if (this.authService.tokenValue) {
-      this.router.navigate(['/']).then();
-    }
+    this.loading = false;
+    this.submitted = false;
+    this.error = '';
+    // if (this.authService.tokenValue) {
+    //   this.router.navigate(['/']).then();
+    // }
   }
 
   ngOnInit() {
@@ -34,17 +37,18 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  onSubmit() {
+  onSubmit(isRegister: boolean) {
     this.submitted = true;
     if (this.loginForm.invalid) { return; }
     this.loading = true;
-    this.authService.authenticate(this.f.username.value, this.f.password.value)
+    this.authService.authenticate(this.f.username.value, this.f.password.value, isRegister)
       .subscribe(
         () => {
-          this.router.navigate(['/']).then();
+          location.reload();
         },
-        error => {
-          this.error = error;
+        (error) => {
+          if (isRegister) this.error = error;
+          else this.error = 'Invalid credentials';
           this.loading = false;
         }
       );

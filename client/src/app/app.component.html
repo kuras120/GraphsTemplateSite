@@ -1,2 +1,12 @@
-<router-outlet></router-outlet>
+<div *ngIf="isLoaded">
+  <div *ngIf="isAuthenticated || isError">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="!isAuthenticated && !isError">
+    <app-login></app-login>
+  </div>
+<!--  <div *ngIf="isError">-->
+<!--    <app-error [error]="errorMessage"></app-error>-->
+<!--  </div>-->
+</div>
 <!--<button (click)="makeRequest()">BIG RED BUTTON</button>-->

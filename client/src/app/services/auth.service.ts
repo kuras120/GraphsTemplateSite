@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, timer} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {Token} from '../models/token.model';
-import { environment } from 'src/environments/environment';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,11 +15,12 @@ export class AuthService {
   private tokenSubject: BehaviorSubject<string>;
 
   constructor(
+    private router: Router,
     private http: HttpClient,
     private cookieService: CookieService
   ) {
-    this.tokenSubject = new BehaviorSubject<string>(cookieService.get('token'));
-    this.countdown = this.setTimer(cookieService.get('token'));
+    this.tokenSubject = new BehaviorSubject<string>(cookieService.get('ACCESS-TOKEN'));
+    this.countdown = this.setTimer(cookieService.get('ACCESS-TOKEN'));
     this.token = this.tokenSubject.asObservable();
   }
 
@@ -52,27 +53,41 @@ export class AuthService {
     }
   }
 
-  public authenticate(username: string, password: string): Observable<string> {
-    return this.http.post<any>(`${environment.api}/token/`, { username, password })
+  public verify() {
+    return this.http.post<any>(`/auth/token/verify/`, {})
+      .pipe(map(data => {
+        if (data.token) {
+          this.initializeVariables(data);
+          return '/';
+        } else {
+          return '/login';
+        }
+      }))
+  }
+
+  public authenticate(username: string, password: string, isRegister: boolean): Observable<string> {
+    return this.http.post<any>(`/auth/token/`, { username, password, register: isRegister })
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
   }
 
   public refresh(): Observable<string> {
-    return this.http.post<any>(`${environment.api}/token/refresh/`, { token: this.tokenValue })
+    return this.http.post<any>(`/auth/token/refresh/`, {})
       .pipe(map(data => {
         return this.initializeVariables(data);
       }));
   }
 
   public clear() {
-    this.cookieService.delete('token');
-    this.tokenSubject.next(null);
+    return this.http.get<any>(`/auth/token/revoke/`)
+      .pipe(map(() => {console.log('logout')}));
+    // this.cookieService.delete('ACCESS-TOKEN');
+    // this.tokenSubject.next(null);
   }
 
   private initializeVariables(data): string {
-    this.cookieService.set('token', data.token);
+    this.cookieService.set('ACCESS-TOKEN', data.token);
     this.tokenSubject.next(data.token);
     this.countdown = this.setTimer(data.token);
     return data.token;

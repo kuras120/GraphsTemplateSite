@@ -4,9 +4,10 @@ from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register('api/graphs', views.GraphViewSet)
+router.register('api/data', views.DataViewSet)
 
 urlpatterns = [
     path('', views.HomePageView.as_view()),
-    path('login/', views.HomePageView.as_view())
+    path('auth/token/revoke/', views.clear)
 ]
 urlpatterns += router.urls

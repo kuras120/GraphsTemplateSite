@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { Graph } from 'src/app/models/graph.model';
 import { GraphService } from 'src/app/services/graph.service';
 import {AuthService} from 'src/app/services/auth.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,8 +36,7 @@ export class DashboardComponent implements OnInit {
     this.show = false;
     this.timer = this.authService.timer.subscribe(remainingTime => {
       if (!remainingTime) {
-        this.authService.clear();
-        location.reload();
+        this.authService.clear().subscribe(() => {location.reload();});
       }
       if (remainingTime <= 10 && !this.show) {
         this.show = !this.show;
@@ -52,12 +51,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getGraphs() {
-    this.graphService.list().subscribe(
+    this.graphService.getGraphs().subscribe(
       response => {
         this.graphs = response;
       },
-      error => console.error(error),
-      () => console.log('Graphs loaded')
+      error => console.error(error)
     );
   }
 
@@ -69,8 +67,8 @@ export class DashboardComponent implements OnInit {
         this.subscribeNewTimer();
       },
       () => {
-        this.authService.clear();
-        location.reload();
+        this.authService.clear()
+          .subscribe(() => {location.reload();});
       }
     )
   }

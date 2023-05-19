@@ -18,9 +18,7 @@ export class GraphComponent implements OnInit {
   @Input()
   yLabel: string;
   @Input()
-  data: [];
-
-  view: any[];
+  data: any[];
 
   // options for the chart
   showXAxis = true;
@@ -37,27 +35,7 @@ export class GraphComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    this.resize();
-  }
-
-  resize() {
-    let width: number;
-    let height: number;
-
-    if (window.innerWidth < 1200) {
-      width = window.innerWidth - 25;
-      height = width / 2;
-    } else {
-      width = (window.innerWidth / 2) - 10;
-      height = width / 2;
-    }
-    this.view = [width, height];
-  }
-
-  onResize(_event: any) {
-    this.resize();
-  }
+  ngOnInit() { }
 
   onSelect(_event: any) {
     console.log('clicked');

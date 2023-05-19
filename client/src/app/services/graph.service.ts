@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Graph} from '../models/graph.model';
-import {environment} from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,8 +10,8 @@ export class GraphService {
 
   constructor(private http: HttpClient) { }
 
-  list() {
-    return this.http.get<Graph[]>(`${environment.api}/graphs/`)
+  getGraphs() {
+    return this.http.get<Graph[]>(`/api/graphs/`)
     .pipe(map(response => {
       const graphs: Graph[] = [];
       response.sort((a, b) => (a.name > b.name) ? 1 : -1);

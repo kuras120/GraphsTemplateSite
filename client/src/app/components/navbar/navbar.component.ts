@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   logout() {
-    this.authService.clear();
-    location.reload();
+    this.authService.clear()
+      .subscribe(() => {location.reload();});
   }
 
   onChange(_event: any) {
