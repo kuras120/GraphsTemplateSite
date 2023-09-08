@@ -1,5 +1,5 @@
 version: '3.7'
-name: GraphTemplateSite-prd
+name: graphtemplatesite-prd
 
 services:
     web:
@@ -22,9 +22,12 @@ services:
         volumes:
             - postgres_data:/var/lib/postgresql/data/
         environment:
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-            - POSTGRES_DB=${DB_NAME}
+            - PGUSER=${SQL_USER}
+            - PGPASSWORD=${SQL_PASSWORD}
+            - PGDATABASE=${SQL_DATABASE}
+            - POSTGRES_USER=${SQL_USER}
+            - POSTGRES_PASSWORD=${SQL_PASSWORD}
+            - POSTGRES_DB=${SQL_DATABASE}
     nginx:
         build:
             context: .
