@@ -12,8 +12,8 @@ import { ErrorInterceptor } from './security/error.interceptor';
 import { AppRoutingModule } from './app.routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
-import { FilterPipeModule } from 'ngx-filter-pipe';
 import {ErrorComponent} from './components/error/error.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -24,17 +24,17 @@ import {ErrorComponent} from './components/error/error.component';
     GraphComponent,
     ErrorComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgxChartsModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        FilterPipeModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        HttpClientXsrfModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    HttpClientXsrfModule,
+    NgOptimizedImage
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

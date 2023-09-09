@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Graph } from 'src/app/models/graph.model';
 import { GraphService } from 'src/app/services/graph.service';
 import {AuthService} from 'src/app/services/auth.service';
@@ -12,15 +12,15 @@ import {Subscription} from 'rxjs';
 export class DashboardComponent implements OnInit {
 
   title = 'Graphs Template Site';
-  query = { name: '' };
+  query: string | null;
   graphs: Graph[];
 
   show: boolean;
   timer: Subscription;
   remainingTime: number;
 
-  @ViewChild('refreshToken') refreshToken;
-  @ViewChild('closeModal') closeModal;
+  @ViewChild('refreshToken') refreshToken: ElementRef;
+  @ViewChild('closeModal') closeModal: ElementRef;
 
   constructor(
     private graphService: GraphService,
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.show = false;
     this.timer = this.authService.timer.subscribe(remainingTime => {
       if (!remainingTime) {
-        this.authService.clear().subscribe(() => {location.reload();});
+        this.authService.clear().subscribe(() => location.reload());
       }
       if (remainingTime <= 10 && !this.show) {
         this.show = !this.show;
@@ -46,8 +46,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  setQuery(value: string) {
-    this.query.name = value;
+  setQuery(value: string | null) {
+    this.query = value;
   }
 
   getGraphs() {
@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
       },
       () => {
         this.authService.clear()
-          .subscribe(() => {location.reload();});
+          .subscribe(() => location.reload());
       }
     )
   }

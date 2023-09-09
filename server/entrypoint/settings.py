@@ -113,7 +113,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_AUTH_COOKIE': 'ACCESS-TOKEN',
     'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=1),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }
 
