@@ -1,4 +1,4 @@
-FROM python:3.8.3-alpine
+FROM python:3.9.18-alpine
 
 WORKDIR /app
 
@@ -12,7 +12,6 @@ RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev nodejs npm
 
 RUN npm install -g npm-check-updates
 RUN npm install --prefix client
-RUN npm audit fix --prefix client
 RUN npm run build --prefix client
 
 #RUN mkdir server/storage/static
