@@ -123,4 +123,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# IDE
 \.idea/
+
+# staticfiles
+staticfiles/
+server/storage/static/*
+!server/storage/static/favicon.ico

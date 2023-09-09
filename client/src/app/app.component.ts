@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {AuthService} from './services/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,160 +8,30 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Graphs Template Site';
-  view: any[];
 
-  // options for the chart
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Sales';
-  timeline = true;
+  isLoaded: boolean;
+  isAuthenticated: boolean;
+  isError: boolean;
 
-  colorScheme = {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
-  };
-
-  // pie
-  showLabels = true;
-
-  // data goes here
-  public single = [
-    {
-      name: 'China',
-      value: 2243772
-    },
-    {
-      name: 'USA',
-      value: 1126000
-    },
-    {
-      name: 'Norway',
-      value: 296215
-    },
-    {
-      name: 'Japan',
-      value: 257363
-    },
-    {
-      name: 'Germany',
-      value: 196750
-    },
-    {
-      name: 'France',
-      value: 204617
-    }
-  ];
-
-  public multi = [
-    {
-      name: 'China',
-      series: [
-        {
-          name: '2018',
-          value: 2243772
-        },
-        {
-          name: '2017',
-          value: 1227770
-        }
-      ]
-    },
-
-    {
-      name: 'USA',
-      series: [
-        {
-          name: '2018',
-          value: 1126000
-        },
-        {
-          name: '2017',
-          value: 764666
-        }
-      ]
-    },
-
-    {
-      name: 'Norway',
-      series: [
-        {
-          name: '2018',
-          value: 296215
-        },
-        {
-          name: '2017',
-          value: 209122
-        }
-      ]
-    },
-
-    {
-      name: 'Japan',
-      series: [
-        {
-          name: '2018',
-          value: 257363
-        },
-        {
-          name: '2017',
-          value: 205350
-        }
-      ]
-    },
-
-    {
-      name: 'Germany',
-      series: [
-        {
-          name: '2018',
-          value: 196750
-        },
-        {
-          name: '2017',
-          value: 129246
-        }
-      ]
-    },
-
-    {
-      name: 'France',
-      series: [
-        {
-          name: '2018',
-          value: 204617
-        },
-        {
-          name: '2017',
-          value: 149797
-        }
-      ]
-    }
-  ];
-  resize() {
-    let width;
-    let height;
-    if (window.innerWidth < 1366) {
-      width = window.innerWidth - 100;
-      height = width / 2;
-    } else {
-      width = (window.innerWidth / 2) - 100;
-      height = width / 2;
-    }
-    this.view = [width, height];
-    console.log(window.innerWidth);
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.isLoaded = false;
+    this.isAuthenticated = false;
+    this.isError = false;
   }
-  ngOnInit(): void {
-    this.resize();
-  }
-  onResize(event) {
-    this.resize();
-  }
-  onSelect(event: {}) {
-    console.log('clicked');
+
+  ngOnInit() {
+    this.authService.verify()
+      .subscribe(data => {
+        this.isAuthenticated = data === '/';
+        this.isLoaded = true;
+      },
+      error => {
+        this.isError = true;
+        this.router.navigate(['/error', {error}]).then();
+        this.isLoaded = true;
+      });
   }
 }

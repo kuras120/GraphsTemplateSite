@@ -1,6 +1,10 @@
-django
-gunicorn
-dj-database-url
-whitenoise
-psycopg2-binary
-djangorestframework
+django == 3.2.16 #framework
+gunicorn #deployment
+drf-yasg #swagger
+whitenoise #staticfiles
+dj-database-url #db manager
+django-cors-headers #cors
+djangorestframework == 3.11.1 #rest
+djangorestframework-jwt #JWT
+psycopg2-binary #postgresql
+# rabbitmq-server #MQ
