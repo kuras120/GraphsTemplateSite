@@ -2,7 +2,6 @@
 if [ $# -eq 0 ]
   then
     echo "You have to provide argument: dev or prd"
-    read -n 1 -s -r -p "Press any key to continue"$'\n'
     exit
 fi
 docker compose -f compose-"$1".yml --env-file .env down -v
@@ -12,4 +11,3 @@ docker compose -f compose-"$1".yml exec web python /app/server/manage.py migrate
 docker compose -f compose-"$1".yml exec web python /app/server/manage.py collectstatic --noinput
 docker compose -f compose-"$1".yml exec web python /app/server/manage.py createsuperuser --noinput
 docker compose -f compose-"$1".yml exec db psql -f /app/data.sql
-read -n 1 -s -r -p "Press any key to continue"$'\n'

@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "rm -r GraphsTemplateSite"
+            ssh $SSH_USER@$SSH_HOST "git clone https://github.com/kuras120/GraphsTemplateSite.git"
+            ssh $SSH_USER@$SSH_HOST "cd GraphsTemplateSite && ./install.sh"

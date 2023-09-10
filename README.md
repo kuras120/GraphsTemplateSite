@@ -2,9 +2,9 @@
 Django template site for data visualisation
 
 1. Docker:
-- ./docker/init.sh <br/>
+- ./init.sh dev<br/>
 Jeżeli coś pójdzie nie tak to odpalanie bez dockera.
-  
+
 2. Bez dockera:
 - ./.run/pyenv/init_db.sh <relatywna ścieżka do katalogu server>
 - ./.run/pyenv/quick_run.sh <rel. śc. client> <rel. śc. server>
