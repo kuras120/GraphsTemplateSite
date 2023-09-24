@@ -3,7 +3,7 @@ gunicorn #deployment
 drf-yasg #swagger
 whitenoise #staticfiles
 django-cors-headers #cors
-djangorestframework == 3.11.1 #rest
+djangorestframework == 3.11.2 #rest
 djangorestframework-jwt #JWT
 psycopg2-binary #postgresql
 # rabbitmq-server #MQ
