@@ -146,10 +146,10 @@ DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.sqlite3'),
         'NAME': os.environ.get('SQL_DATABASE', default=os.path.join(BASE_DIR, 'db.sqlite3')),
-        'USER': os.environ.get('SQL_USER', 'admin1'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'ADmin12#$'),
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),
-        'PORT': os.environ.get('SQL_PORT', '5432')
+        'USER': os.environ.get('SQL_USER', default='admin1'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', default='ADmin12#$'),
+        'HOST': os.environ.get('SQL_HOST', default='localhost'),
+        'PORT': os.environ.get('SQL_PORT', default='5432')
     }
 }
 

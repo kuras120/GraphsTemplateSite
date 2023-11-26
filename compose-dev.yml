@@ -22,9 +22,6 @@ services:
         volumes:
             - postgres_data:/var/lib/postgresql/data/
         environment:
-            - PGUSER=${SQL_USER}
-            - PGPASSWORD=${SQL_PASSWORD}
-            - PGDATABASE=${SQL_DATABASE}
             - POSTGRES_USER=${SQL_USER}
             - POSTGRES_PASSWORD=${SQL_PASSWORD}
             - POSTGRES_DB=${SQL_DATABASE}
