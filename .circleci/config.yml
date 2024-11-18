@@ -8,11 +8,12 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "rm -r GraphsTemplateSite"
-            ssh $SSH_USER@$SSH_HOST "git clone https://github.com/kuras120/GraphsTemplateSite.git"
-            ssh $SSH_USER@$SSH_HOST "cd GraphsTemplateSite && chmod +x init.sh install.sh"
-            ssh $SSH_USER@$SSH_HOST "cp .env GraphsTemplateSite/.env"
-            ssh $SSH_USER@$SSH_HOST "cd GraphsTemplateSite && ./install.sh"
+            echo "Disabled"
+#            ssh $SSH_USER@$SSH_HOST "rm -r GraphsTemplateSite"
+#            ssh $SSH_USER@$SSH_HOST "git clone https://github.com/kuras120/GraphsTemplateSite.git"
+#            ssh $SSH_USER@$SSH_HOST "cd GraphsTemplateSite && chmod +x init.sh install.sh"
+#            ssh $SSH_USER@$SSH_HOST "cp .env GraphsTemplateSite/.env"
+#            ssh $SSH_USER@$SSH_HOST "cd GraphsTemplateSite && ./install.sh"
 
 workflows:
   deploy-workflow:
